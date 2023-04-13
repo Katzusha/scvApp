@@ -1,0 +1,44 @@
+﻿@page "/SSGOLogIn";
+
+<div class="fullscreen" style="background-color: #a9d046">
+    <div class="login-form">
+        <form>
+            <input type="text" placeholder="eMail" class="textbox"><br>
+            <input type="password" placeholder="Password" class="textbox"><br>
+            <button type="submit" class="login-button">Log in</button>
+        </form>
+    </div>
+</div>
+<footer class="footer-master">
+    <hr>
+    <div class="container">
+        <form>
+            <table>
+                <tbody>
+                    <tr style="height: 100px;">
+                        <td style="width: 100px;">
+                            <button formaction="/SSGOLogIn" class="school-button" style="background-color: #a9d046;">
+                                <img src="https://www.scv.si/wp-content/themes/yoo_master2_wp/images/ssgo.svg">
+                            </button>
+                        </td>
+                        <td style="width: 100px;">
+                            <button formaction="/ERSLogIn" class="school-button" style="background-color: #0194d9;">
+                                <img src="https://www.scv.si/wp-content/themes/yoo_master2_wp/images/ers.svg">
+                            </button>
+                        </td>
+                        <td style="width: 100px;">
+                            <button formaction="/SSDLogIn" class="school-button" style="background-color: #ee5ba0;">
+                                <img src="https://www.scv.si/wp-content/themes/yoo_master2_wp/images/ssd.svg">
+                            </button>
+                        </td>
+                        <td style="width: 100px;">
+                            <button formaction="GIMLogIn" class="school-button" style="background-color: #ffca05;">
+                                <img src="https://www.scv.si/wp-content/themes/yoo_master2_wp/images/gim.svg">
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</footer>

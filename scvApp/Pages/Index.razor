@@ -1,0 +1,162 @@
+﻿@page "/";
+
+@inject NavigationManager NavManager
+@inject IJSRuntime JsRuntime
+
+<div class="fullscreen" style="background-color: #ed1164">
+    <div class="client-form">
+        <form onsubmit="@CheckSubmit">
+            <table style="width: 100%;">
+                <tr>
+                    <td class="left-td-client">
+                        <input type="text" class="textbox" @bind="firstname" placeholder="Firstname" required/>
+                        <br />
+                        <input type="text" class="textbox" @bind="surname" placeholder="Surname" required/>
+                        <br />
+                        <input type="date" class="textbox" @bind="birth" placeholder="Birth" required/>
+                        <br />
+                        <input type="email" class="textbox" @bind="email" placeholder="Email" required/>
+                        <br />
+                        <input type="text" class="textbox" @bind="phonenumber" placeholder="Phone number" required/>
+                        <br />
+                        <input type="text" class="textbox" @bind="school" placeholder="School" required/>
+                        <br />
+                        <input type="text" class="textbox" @bind="schooladdress" placeholder="School address" required/>
+                        <br />
+                        <select class="textbox" @bind="numberofstudents">
+                            <option>Number of students</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                            <option>13</option>
+                        </select>
+                    </td>
+                    <td class="right-td-client">
+                        <div style="margin: 0 auto; text-align: center;">
+                            <button class="school-button-client" style="background-color: #a9d046;" type="button" @onclick="SSGO_Click">
+                                <img src="https://www.scv.si/wp-content/themes/yoo_master2_wp/images/ssgo.svg"><div>@ssgo</div>
+                            </button>
+                            <button class="school-button-client" style="background-color: #0094d9;" type="button" @onclick="ERS_Click">
+                                <img src="https://www.scv.si/wp-content/themes/yoo_master2_wp/images/ers.svg"><div>@ers</div>
+                            </button>
+
+                            <br />
+                            <button class="school-button-client" style="background-color: #ee5ba0;" type="button" @onclick="SSD_Click">
+                                <img src="https://www.scv.si/wp-content/themes/yoo_master2_wp/images/ssd.svg"><div>@ssd</div>
+                            </button><button class="school-button-client" style="background-color: #ffca05;" type="button" @onclick="GIM_Click">
+                                <img src="https://www.scv.si/wp-content/themes/yoo_master2_wp/images/gim.svg"><div>@gim</div>
+                            </button>
+
+                            <br />
+                            <button class="school-button-client-all" style="background-color: rgba(0, 0, 0, 0.2);" type="button" @onclick="All_Click">
+                                ALL
+                            </button>
+                            <br />
+                            <select class="textbox" style="max-width: 310px;" @bind="date">
+                                <option>Date</option>                                
+
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <button type="submit" class="login-button-client" formaction="/Thank-you">SUBMIT</button>
+        </form>
+    </div>
+</div>
+
+@code {
+    string firstname, surname, email, phonenumber, school, schooladdress, numberofstudents, date;
+    DateTime birth;
+
+    string ssgo = "";
+    private void SSGO_Click(object sender)
+    {
+        if (ssgo == "")
+        {
+            ssgo = "✔";
+        }
+        else
+        {
+            ssgo = "";
+        }
+    }
+
+    string ers = "";
+    private void ERS_Click(object sender)
+    {
+        if (ers == "")
+        {
+            ers = "✔";
+        }
+        else
+        {
+            ers = "";
+        }
+    }
+
+    string ssd = "";
+    private void SSD_Click(object sender)
+    {
+        if (ssd == "")
+        {
+            ssd = "✔";
+        }
+        else
+        {
+            ssd = "";
+        }
+    }
+
+    string gim = "";
+    private void GIM_Click(object sender)
+    {
+        if (gim == "")
+        {
+            gim = "✔";
+        }
+        else
+        {
+            gim = "";
+        }
+    }
+
+    private void All_Click(object sender)
+    {
+        if (ssgo == "" || ers == "" || ssd == "" || gim == "")
+        {
+            ssgo = "✔";
+            ers = "✔";
+            ssd = "✔";
+            gim = "✔";
+        }
+        else
+        {
+            ssgo = "";
+            ers = "";
+            ssd = "";
+            gim = "";
+        }
+    }
+
+    public void CheckSubmit()
+    {
+        if (ssgo != "" || ers != "" || ssd != "" || gim != "")
+        {
+            NavManager.NavigateTo("/Thank-you");
+        }
+        else
+        {
+            JsRuntime.InvokeVoidAsync("alert", "Please check at least one of the schools!");
+        }
+    }
+}

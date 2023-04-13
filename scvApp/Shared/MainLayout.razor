@@ -1,0 +1,40 @@
+﻿@inherits LayoutComponentBase
+
+@inject NavigationManager NavManager
+
+<div class="page">
+    <div class="sidebar">
+
+        @if (NavManager.Uri.ToString().Contains("LogIn"))
+        {
+            <LogInNavBar/>
+        }
+        else if (NavManager.Uri.ToString().Contains("Admin"))
+        {
+
+        }
+        else if (NavManager.Uri.ToString().Contains("Thank-you"))
+        {
+            <ThankYouNavBar/>
+        }
+        else if (NavManager.Uri.ToString().Contains("Master/"))
+        {
+            
+        }
+        else if (NavManager.Uri.ToString().Contains("Create"))
+        {
+
+        }
+        else
+        {
+            <ClientNavMenu/>
+        }
+
+    </div>
+
+    <main>
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>

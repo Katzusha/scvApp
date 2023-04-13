@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    ;
+}
+
+.navbar-master {
+    width: 100%;
+    height: 100px;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.navbar-master .container {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    text-align: center;
+    width: 100%;
+    padding-top: 10px;
+}
+
+.login-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 250px;
+}
+
+.footer-master {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    text-align: center;
+    padding-top: 5px;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-master .container {
+    margin-top: -100px;
+    height: 100px;
+    width: 400px;
+}
+
+.footer-master .container .school-button {
+    border: 0px;
+    margin-left: -2px;
+    height: 100px;
+    width: 100px;
+    cursor: default;
+    transition: all .3s;
+}
+
+.footer-master .container .school-button:hover {
+    height: 120px !important;
+    margin-top: -20px;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.footer-master .container .school-button img {
+    width: 100px;
+}
+
+
+
+.welcome-container {
+    margin: 0 auto;
+    font-size: 70px;
+    height: 100px;
+    color: #FFFFFF;
+    vertical-align: middle;
+    cursor: default;
+    font-family: fantasy;
+}
+
+.textbox {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #FFFFFF;
+    border-radius: 25px;
+    border-width: 0px;
+    padding: 10px;
+    width: 500px;
+    height: 25px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    font-size: 24px;
+    outline: none;
+    transition: box-shadow .3s ease-in-out;
+}
+
+    .textbox::placeholder {
+        color: #FFFFFF;
+        opacity: 0.75;
+    }
+
+    .textbox:focus {
+        box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.2);
+        transition: box-shadow .3s ease-in-out;
+    }
+
+    .textbox:hover {
+        box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.2);
+        transition: box-shadow .3s ease-in-out;
+    }
+
+.login-button {
+    background: rgba(0, 0, 0, 0.2);
+    width: 200px;
+    height: 50px;
+    border-width: 0px;
+    border-radius: 15px;
+    color: #FFFFFF;
+    font-size: 24px;
+    float: right;
+    transition: 0.5s;
+    cursor: default;
+    margin: 0;
+}
+
+    .login-button:hover {
+        height: 55px;
+        width: 210px;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-right: -5px;
+        margin-bottom: -2.5px;
+    }

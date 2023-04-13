@@ -1,0 +1,379 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    cursor: default;
+}
+
+    a:hover {
+        cursor: pointer;
+    }
+
+.loading-address {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: Black;
+    font-weight: 900;
+    font-size: 50px;
+}
+
+.navbar-master {
+    width: 100%;
+    height: 100px;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.navbar-master .container {
+    /*position: fixed;*/
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    text-align: center;
+    width: 100%;
+    padding-top: 10px;
+}
+
+.login-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 250px;
+    width: 50%;
+    max-width: 500px;
+    min-width: 300px;
+}
+
+.client-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    max-width: 1100px;
+    min-width: 710px;
+    text-align: center;
+}
+
+.left-td-client {
+    padding: 10px;
+    padding-right: 40px;
+}
+
+.right-td-client {
+    padding: 10px;
+    padding-left: 40px;
+}
+
+.fullscreen {
+    width: 100%;
+    margin-top: -100px;
+    padding-bottom: 100px;
+    height: 100%;
+    min-height: calc(100vh - 100px);
+}
+
+.footer-master {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    text-align: center;
+    padding-top: 5px;
+    bottom: 0;
+    width: 100%;
+}
+
+    .footer-master .container {
+        margin-top: -100px;
+        height: 100px;
+        width: 400px;
+    }
+
+        .footer-master .container .school-button {
+            border: 0px;
+            margin-left: -2px;
+            height: 100px;
+            width: 100px;
+            cursor: default;
+            transition: all .3s;
+        }
+
+            .footer-master .container .school-button:hover {
+                height: 120px !important;
+                margin-top: -20px;
+                cursor: pointer;
+                transition: all .3s;
+            }
+
+            .footer-master .container .school-button img {
+                width: 100px;
+            }
+
+.school-button-client {
+    border: 0px;
+    height: 150px;
+    border-radius: 75px;
+    width: 150px;
+    margin: 5px;
+    cursor: default;
+    transition: all .3s;
+}
+
+    .school-button-client:hover {
+        height: 155px;
+        width: 155px;
+        cursor: pointer;
+        transition: all .3s;
+        margin: 2.5px;
+    }
+
+    .school-button-client div {
+        height: 0px;
+        width: 0px;
+        margin-top: -80px;
+        margin-bottom: 80px;
+        font-size: 75px;
+        margin-left: 90px;
+        color: #FFFFFF;
+        font-weight: bolder;
+    }
+
+    .school-button-client img {
+        width: 100px;
+    }
+
+.school-button-client-all {
+    border: 0px;
+    height: 90px;
+    border-radius: 75px;
+    width: 310px;
+    margin: 5px;
+    cursor: default;
+    color: white;
+    font-size: 24px;
+    transition: all .3s;
+}
+
+    .school-button-client-all:hover {
+        height: 95px;
+        width: 315px;
+        cursor: pointer;
+        transition: all .3s;
+        margin: 2.5px;
+    }
+
+.welcome-container {
+    font-size: 70px;
+    height: 100px;
+    color: #FFFFFF;
+    vertical-align: middle;
+    cursor: default;
+    font-family: fantasy;
+}
+
+.textbox {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #FFFFFF;
+    border-radius: 15px;
+    border-width: 0px;
+    /*padding: 10px;*/
+    width: 100%;
+    height: 50px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    text-align: center;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    font-size: 24px;
+    outline: none;
+    transition: box-shadow .3s ease-in-out;
+}
+
+    .textbox::placeholder {
+        color: #FFFFFF;
+        opacity: 0.5;
+    }
+
+    .textbox:focus {
+        box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.2);
+        transition: box-shadow .3s ease-in-out;
+    }
+
+    .textbox:hover {
+        box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.2);
+        transition: box-shadow .3s ease-in-out;
+    }
+
+.login-button {
+    background: rgba(0, 0, 0, 0.2);
+    width: 200px;
+    height: 50px;
+    border-width: 0px;
+    border-radius: 15px;
+    color: #FFFFFF;
+    font-size: 24px;
+    float: right;
+    transition: 0.5s;
+    cursor: default;
+    margin: 0;
+}
+
+    .login-button:hover {
+        height: 55px;
+        width: 210px;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-right: -2.5px;
+        margin-bottom: -2.5px;
+    }
+
+.login-button-client {
+    background: rgba(0, 0, 0, 0.2);
+    width: 200px;
+    margin-top: 50px;
+    height: 50px;
+    border-width: 0px;
+    border-radius: 15px;
+    color: #FFFFFF;
+    font-size: 24px;
+    transition: 0.5s;
+    cursor: default;
+}
+
+    .login-button-client:hover {
+        height: 55px;
+        width: 210px;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-right: -2.5px;
+        margin-bottom: -2.5px;
+    }
+
+.textbox option {
+    background-color: #ba0d4e;
+    color: white;
+    border: 0px;
+}
+
+.left-button {
+    height: 100px;
+    float: left;
+    color: white;
+    left: 0px;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.2);
+    margin-top: -10px;
+    width: 20%;
+    font-size: 30px;
+    text-decoration: none;
+    vertical-align: text-bottom;
+    font-family: fantasy;
+    padding-top: 0px;
+    min-width: 300px;
+    --b: 1000px;
+    --s: 120px;
+    --g1: #000 var(--b),#0000 0 calc(100% - var(--b)),#000 0;
+    --g2: #0000 calc(0.707*var(--s)), #000 0 calc(0.707*var(--s) + var(--b)), #0000 0 calc(100% - 0.707*var(--s) - var(--b)), #000 0 calc(100% - 0.707*var(--s)), #0000 0;
+    -webkit-mask: linear-gradient(-55deg,var(--g2)), linear-gradient(90deg,var(--g1)) 50%/100% calc(100% - 2*var(--s)) no-repeat;
+    transition: .5s all;
+}
+
+    .left-button:hover {
+        padding-top: 20px;
+        transition: .5s all;
+    }
+
+.right-button {
+    height: 100px;
+    float: right;
+    color: white;
+    right: 0px;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.2);
+    margin-top: -10px;
+    width: 450px;
+    margin-right: -230px;
+    font-size: 30px;
+    text-decoration: none;
+    vertical-align: text-bottom;
+    font-family: fantasy;
+    padding-top: 0px;
+    --b: 140px;
+    --s: 120px;
+    --g1: #000 var(--b),#0000 0 calc(100% - var(--b)),#000 0;
+    --g2: #0000 calc(0.707*var(--s)), #000 0 calc(0.707*var(--s) + var(--b)), #0000 0 calc(100% - 0.707*var(--s) - var(--b)), #000 0 calc(100% - 0.707*var(--s)), #0000 0;
+    -webkit-mask: linear-gradient(-55deg,var(--g2)), linear-gradient(90deg,var(--g1)) 50%/100% calc(100% - 2*var(--s)) no-repeat;
+    transition: .5s all;
+}
+
+    .right-button:hover {
+        padding-top: 20px;
+        transition: .5s all;
+    }
+
+.fullscreen-table {
+    padding-top: 140px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+    .fullscreen-table table {
+        width: 100%;
+        text-align: center;
+        border-collapse: collapse;
+    }
+
+th {
+    color: white;
+    font-size: 20px;
+    font-family: fantasy;
+    font-weight: 100;
+}
+
+.td-row {
+    width: 25%;
+    color: white;
+    font-size: 24px;
+    border: none;
+    height: 35px;
+    cursor: default;
+}
+
+    .td-row:hover {
+        background-color: #f2327a;
+        cursor: pointer;
+    }
+
+    .td-row td p {
+        background-color: rgba(0, 0, 0, 0.2);
+        height: 30px;
+        padding-top: 3px;
+    }
+
+.add-button {
+    margin-top: 10px;
+    background-color: #f2327a;
+    width: 100%;
+    border-radius: 15px;
+    height: 35px;
+    color: white;
+    font-size: 24px;
+    font-family: fantasy;
+    padding-top: 5px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    display: block;
+    margin-bottom: 10px;
+}
+
+    .add-button:hover {
+        box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.2);
+    }

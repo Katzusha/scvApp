@@ -1,0 +1,35 @@
+﻿@page "/Master/Submited-dates";
+
+<nav class="navbar-master">
+    <div class="container">
+        <a href="/Master/All-dates" class="left-button"><div style="margin-top: 12px;">ALL<br />DATES</div></a>
+        <a class="welcome-container">SUBMITED DATES</a>
+        <a href="/" class="right-button"><div style="margin-top: 12px; margin-left: -170px;">SUB<br />ADMINS</div></a>
+    </div>
+</nav>
+
+<div class="fullscreen" style="background-color: #ed1164">
+    <div class="fullscreen-table">
+        <table>
+            <tr>
+                <th style="width:calc(100% / 6);">Name and Surname</th>
+                <th style="width:calc(100% / 6);">School</th>
+                <th style="width:calc(100% / 6);">Email</th>
+                <th style="width:calc(100% / 6);">Phone number</th>
+                <th style="width:calc(100% / 6);">Number of students</th>
+                <th style="width:calc(100% / 6);">Date and Time</th>
+            </tr>
+            @for (int x = 0; x < 100; x++)
+            {
+                <tr class="td-row">
+                    <td><p>@x</p></td>
+                    <td><p>@x</p></td>
+                    <td><p>@x</p></td>
+                    <td><p>@x</p></td>
+                    <td><p>@x</p></td>
+                    <td><p>@x</p></td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

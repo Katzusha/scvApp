@@ -1,0 +1,26 @@
+﻿@page "/Create-Submited-Date";
+
+<nav class="navbar-master">
+    <div class="container">
+        <a href="/" class="left-button"><div style="margin-top: 12px;">GO<br />BACK</div></a>
+        <a href="/Master/Submited-dates" class="welcome-container">CREATE NEW DATE</a>
+    </div>
+</nav>
+
+<div class="fullscreen" style="background-color: #ed1164">
+    <div class="login-form">
+        <form>
+            <input type="date" placeholder="Date" class="textbox" @bind="Date"><br>
+            <input type="time" placeholder="Hour" class="textbox" @bind="Time"><br>
+            <input type="number" placeholder="Max number of students" class="textbox" @bind="MaxNumberOfStudents"><br>
+            <button type="button" formaction="/Master/Submited-dates" class="login-button">Create</button>
+        </form>
+    </div>
+</div>
+
+@code 
+{
+    public DateOnly Date;
+    public TimeOnly Time;
+    public int MaxNumberOfStudents;
+}
