@@ -8,6 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<IAdminService, AdminService>();
+builder.Services.AddSingleton<ISchoolService, SchoolService>();
+builder.Services.AddSingleton<ISubmitService, SubmitService>();
+builder.Services.AddSingleton<ISchoolSubmitService, SchoolSubmitService>();
+builder.Services.AddSingleton<IDateService, DateService>();
 
 var app = builder.Build();
 

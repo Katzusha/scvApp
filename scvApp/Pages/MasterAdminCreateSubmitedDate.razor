@@ -1,26 +1,51 @@
-﻿@page "/Create-Submited-Date";
+﻿@page "/Create-Date";
+
+@inject NavigationManager NavManager;
+@inject IJSRuntime JsRuntime;
+
+@inject Services.IDateService dateservice;
+
+@using Models
 
 <nav class="navbar-master">
     <div class="container">
-        <a href="/" class="left-button"><div style="margin-top: 12px;">GO<br />BACK</div></a>
-        <a href="/Master/Submited-dates" class="welcome-container">CREATE NEW DATE</a>
+        <a href="/Master/All-dates" class="left-button"><div style="margin-top: 12px;">GO<br />BACK</div></a>
+        <a class="welcome-container">CREATE NEW DATE</a>
     </div>
 </nav>
 
 <div class="fullscreen" style="background-color: #ed1164">
     <div class="login-form">
-        <form>
-            <input type="date" placeholder="Date" class="textbox" @bind="Date"><br>
-            <input type="time" placeholder="Hour" class="textbox" @bind="Time"><br>
-            <input type="number" placeholder="Max number of students" class="textbox" @bind="MaxNumberOfStudents"><br>
-            <button type="button" formaction="/Master/Submited-dates" class="login-button">Create</button>
+        <form onsubmit="@CheckSubmit">
+            <input type="date" placeholder="Date" class="textbox" @bind=date.Term><br>
+            <input type="time" placeholder="Hour" class="textbox" @bind=date.Start><br>
+            <input type="number" placeholder="Max number of students" class="textbox" @bind=date.MaxNumberOfStudents><br>
+            <button type="submit" formaction="/Master/Submited-dates" class="login-button">Create</button>
         </form>
     </div>
 </div>
 
 @code 
 {
-    public DateOnly Date;
-    public TimeOnly Time;
-    public int MaxNumberOfStudents;
+    Date date = new Date();
+
+    protected override async Task OnInitializedAsync()
+    {
+        date.Term = DateOnly.Parse(DateTime.Today.ToShortDateString());
+    }
+
+    public async Task CheckSubmit()
+    {
+        try
+        {
+            await dateservice.AddNewDate(date);
+
+            date = new Date();
+            NavManager.NavigateTo("/Master/All-dates");
+        }
+        catch (Exception ex)
+        {
+            await JsRuntime.InvokeVoidAsync("alert", ex.InnerException.Message);
+        }
+    }
 }

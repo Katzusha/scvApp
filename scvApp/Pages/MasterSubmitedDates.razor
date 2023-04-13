@@ -1,10 +1,15 @@
 ﻿@page "/Master/Submited-dates";
 
+@inject Services.ISubmitService submitservice;
+@inject Services.IDateService dateservice;
+
+@using Models
+
 <nav class="navbar-master">
     <div class="container">
         <a href="/Master/All-dates" class="left-button"><div style="margin-top: 12px;">ALL<br />DATES</div></a>
         <a class="welcome-container">SUBMITED DATES</a>
-        <a href="/" class="right-button"><div style="margin-top: 12px; margin-left: -170px;">SUB<br />ADMINS</div></a>
+        <a class="right-button"><div style="margin-top: 12px; margin-left: -170px;">SUB<br />ADMINS</div></a>
     </div>
 </nav>
 
@@ -19,17 +24,29 @@
                 <th style="width:calc(100% / 6);">Number of students</th>
                 <th style="width:calc(100% / 6);">Date and Time</th>
             </tr>
-            @for (int x = 0; x < 100; x++)
+            @foreach (var submit in submits)
             {
                 <tr class="td-row">
-                    <td><p>@x</p></td>
-                    <td><p>@x</p></td>
-                    <td><p>@x</p></td>
-                    <td><p>@x</p></td>
-                    <td><p>@x</p></td>
-                    <td><p>@x</p></td>
+                    <td><p>@submit.Firstname @submit.Surname</p></td>
+                    <td><p>@submit.SchoolTitle</p></td>
+                    <td><p>@submit.Email</p></td>
+                    <td><p>@submit.PhoneNumber</p></td>
+                    <td><p>@submit.NumberOfStudents</p></td>
+                    <td><p>@dates.FirstOrDefault(vardate => vardate.Id == submit.Date).Term</p></td>
                 </tr>
             }
         </table>
     </div>
 </div>
+
+@code
+{
+    List<Submit> submits = new List<Submit>();
+    List<Date> dates = new List<Date>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        dates = await dateservice.GetAllDates();
+        submits = await submitservice.GetAllSubmits();
+    }
+}

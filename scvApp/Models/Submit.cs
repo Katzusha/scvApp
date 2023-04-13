@@ -10,6 +10,8 @@
         public string PhoneNumber { get; set; }
         public int NumberOfStudents { get; set; }
         public string Class { get; set; }
+        public string SchoolTitle { get; set; }
+        public string Address { get; set; }
         public int Date { get; set; }
         public TimeOnly Start { get; set; }
         public TimeOnly Break { get; set; }

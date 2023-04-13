@@ -1,0 +1,226 @@
+﻿@page "/";
+
+@inject NavigationManager NavManager;
+@inject IJSRuntime JsRuntime;
+
+@inject Services.ISubmitService submitservice;
+@inject Services.ISchoolService schoolservice;
+@inject Services.ISchoolSubmitService schoolsubmitservice;
+@inject Services.IDateService dateservice;
+@using Models;
+
+<div class="fullscreen" style="background-color: #ed1164">
+    <div class="client-form">
+        <form onsubmit="@CheckSubmit" style="margin-bottom: -80px;">
+            <table style="width: 100%;">
+                <tr>
+                    <td class="left-td-client">
+                        <input type="text" class="textbox" @bind="submit.Firstname" placeholder="Firstname" required/>
+                        <br />
+                        <input type="text" class="textbox" @bind="submit.Surname" placeholder="Surname" required/>
+                        <br />
+                        <input type="date" class="textbox" @bind="birth" placeholder="Birth" required/>
+                        <br />
+                        <input type="email" class="textbox" @bind="submit.Email" placeholder="Email" required/>
+                        <br />
+                        <input type="text" class="textbox" @bind="submit.PhoneNumber" placeholder="Phone number" required/>
+                        <br />
+                        <input type="text" class="textbox" @bind="submit.SchoolTitle" placeholder="School title" required/>
+                        <br />
+                        <input type="text" class="textbox" @bind="submit.Address" placeholder="School address" required/>
+                        <br />
+                        <input type="number" class="textbox" min="5" max="9" @bind="submit.Class" placeholder="Class" required />
+                        <br />
+                        <select class="textbox" @bind="date.Term" @onselectionchange="UpdateMaxNumberOfStudents" required>
+                            <option selected>Date</option>
+
+                            @foreach (var date in dates.OrderBy(vardate => vardate.Term).ToList())
+                            {
+                                if (submits.Any(submit => submit.Date == date.Id) == false)
+                                {
+                                    <option>@date.Term</option>
+                                }
+                            }
+
+                        </select>
+                        <br />
+                        <input type="number" placeholder="Number of students" max="@maxnumberofstudents" min="0" class="textbox" @bind="submit.NumberOfStudents" required />
+                    </td>
+                    <td class="right-td-client">
+                        <table style="width:100%;">
+                            <tr>
+                                <td>
+                                    <input type="time" class="textbox" required @bind="submit.Start"/>
+                                </td>
+                                <td>
+                                    <input type="time" class="textbox" required @bind="submit.End"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <input type="time" class="textbox" @bind="submit.Break"/>
+                        <br />
+                        <br />
+                        <div style="margin: 0 auto; text-align: center;">
+                            <button class="school-button-client" style="background-color: #a9d046;" type="button" @onclick="SSGO_Click">
+                                <img src="https://www.scv.si/wp-content/themes/yoo_master2_wp/images/ssgo.svg"><div>@ssgo</div>
+                            </button>
+                            <button class="school-button-client" style="background-color: #0094d9;" type="button" @onclick="ERS_Click">
+                                <img src="https://www.scv.si/wp-content/themes/yoo_master2_wp/images/ers.svg"><div>@ers</div>
+                            </button>
+
+                            <br />
+                            <button class="school-button-client" style="background-color: #ee5ba0;" type="button" @onclick="SSD_Click">
+                                <img src="https://www.scv.si/wp-content/themes/yoo_master2_wp/images/ssd.svg"><div>@ssd</div>
+                            </button><button class="school-button-client" style="background-color: #ffca05;" type="button" @onclick="GIM_Click">
+                                <img src="https://www.scv.si/wp-content/themes/yoo_master2_wp/images/gim.svg"><div>@gim</div>
+                            </button>
+
+                            <br />
+                            <button class="school-button-client-all" style="background-color: rgba(0, 0, 0, 0.2);" type="button" @onclick="All_Click">
+                                ALL
+                            </button>
+                            <br />
+                            <select class="textbox" @bind="submit.Type" required>
+                                <option>Lokacija ogleda</option>
+                                <option>ŠCV</option>
+                                <option>MIC</option>
+                                <option>Obisk OŠ</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <input type="text" style="height: 100px;" class="textbox" placeholder="Note" @bind="submit.Note"/>
+            <button type="submit" class="login-button-client" formaction="/Thank-you">SUBMIT</button>
+        </form>
+    </div>
+</div>
+
+@code {
+    string numberofstudents;
+    int maxnumberofstudents = 0;
+    DateTime birth;
+
+    Date date = new Date();
+    List<Date> dates = new List<Date>();
+    List<Submit> submits = new List<Submit>();
+    List<School> schools = new List<School>();
+    protected override async Task OnInitializedAsync()
+    {
+        dates = await dateservice.GetAllDates();
+        submits = await submitservice.GetAllSubmits();
+
+        schools = await schoolservice.GetAllSchools();
+    }
+
+    public void UpdateMaxNumberOfStudents()
+    {
+        date = dates.FirstOrDefault(vardate => vardate.Term == date.Term);
+        maxnumberofstudents = date.MaxNumberOfStudents;
+
+        JsRuntime.InvokeVoidAsync("alert", maxnumberofstudents.ToString());
+    }
+
+    string ssgo = "";
+    private void SSGO_Click(object sender)
+    {
+        if (ssgo == "")
+        {
+            ssgo = "✔";
+        }
+        else
+        {
+            ssgo = "";
+        }
+    }
+
+    string ers = "";
+    private void ERS_Click(object sender)
+    {
+        if (ers == "")
+        {
+            ers = "✔";
+        }
+        else
+        {
+            ers = "";
+        }
+    }
+
+    string ssd = "";
+    private void SSD_Click(object sender)
+    {
+        if (ssd == "")
+        {
+            ssd = "✔";
+        }
+        else
+        {
+            ssd = "";
+        }
+    }
+
+    string gim = "";
+    private void GIM_Click(object sender)
+    {
+        if (gim == "")
+        {
+            gim = "✔";
+        }
+        else
+        {
+            gim = "";
+        }
+    }
+
+    private void All_Click(object sender)
+    {
+        if (ssgo == "" || ers == "" || ssd == "" || gim == "")
+        {
+            ssgo = "✔";
+            ers = "✔";
+            ssd = "✔";
+            gim = "✔";
+        }
+        else
+        {
+            ssgo = "";
+            ers = "";
+            ssd = "";
+            gim = "";
+        }
+    }
+
+    Submit submit = new Submit();
+    public async Task CheckSubmit()
+    {
+        if (ssgo != "" || ers != "" || ssd != "" || gim != "")
+        {
+            try
+            {
+                date = dates.FirstOrDefault(vardate => vardate.Term == date.Term);
+
+                submit.Date = date.Id;
+
+                if(submit.Note == null)
+                {
+                    submit.Note = "";
+                }
+
+                await submitservice.AddNewSubmit(submit);
+
+                submit = new Submit();
+
+                NavManager.NavigateTo("/Thank-you");
+            }
+            catch (Exception ex)
+            {
+                await JsRuntime.InvokeVoidAsync("alert", ex.InnerException.Message);
+            }
+        }
+        else
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Please check at least one of the schools!");
+        }
+    }
+}

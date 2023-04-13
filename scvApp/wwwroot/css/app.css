@@ -66,11 +66,13 @@ body {
 .left-td-client {
     padding: 10px;
     padding-right: 40px;
+    width: 50%;
 }
 
 .right-td-client {
     padding: 10px;
     padding-left: 40px;
+    width: 50%;
 }
 
 .fullscreen {

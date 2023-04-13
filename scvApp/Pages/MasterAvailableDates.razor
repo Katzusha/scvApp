@@ -1,10 +1,14 @@
 ﻿@page "/Master/All-dates";
 
+@inject Services.IDateService dateservice;
+@inject Services.ISubmitService submitservice;
+@using Models
+
 <nav class="navbar-master">
     <div class="container">
         <a href="/Master/Submited-dates" class="left-button"><div style="margin-top: 12px;">SUBMITED<br />DATES</div></a>
         <a  class="welcome-container">ALL DATES</a>
-        <a href="/Master/Submited-dates" class="right-button"><div style="margin-top: 12px; margin-left: -170px;">SUB<br />ADMINS</div></a>
+        <a class="right-button"><div style="margin-top: 12px; margin-left: -170px;">SUB<br />ADMINS</div></a>
     </div>
 </nav>
 
@@ -18,17 +22,35 @@
                 <th style="width: calc(100% / 4);">Is taken</th>
             </tr>
             <tr>
-                <td colspan="4"><a class="add-button" href="/Create-Submited-Date">NEW DATE</a></td>
+                <td colspan="4"><a class="add-button" href="/Create-Date">NEW DATE</a></td>
             </tr>
-            @for (int x = 0; x < 100; x++)
+            @foreach (var date in dates)
             {
                 <tr class="td-row">
-                    <td><p>@x</p></td>
-                    <td><p>@x</p></td>
-                    <td><p>@x</p></td>
-                    <td><p>@x</p></td>
+                    <td><p>@date.Term.ToString()</p></td>
+                    <td><p>@date.Start.ToString()</p></td>
+                    <td><p>@date.MaxNumberOfStudents.ToString()</p></td>
+                    @if (submits.Any(submit => submit.Date == date.Id) == true)
+                    {
+                        <td><p>Taken</p></td>
+                    }
+                    else
+                    {
+                        <td><p>Free</p></td>
+                    }
                 </tr>
             }
         </table>
     </div>
 </div>
+
+@code
+{
+    List<Date> dates = new List<Date>();
+    List<Submit> submits = new List<Submit>();
+    protected override async Task OnInitializedAsync()
+    {
+        dates = await dateservice.GetAllDates();
+        submits = await submitservice.GetAllSubmits();
+    }
+}
