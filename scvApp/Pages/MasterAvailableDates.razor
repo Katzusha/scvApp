@@ -31,19 +31,19 @@
                 @if (submits.Any(submit => submit.Date == date.Id) == true)
                 {
                     <tr class="td-row" @onclick="() => EditFreeRow(date.Id)">
-                        <td><p>@date.Term.ToString()</p></td>
+                        <td><p style="border-radius: 15px 0px 0px 15px;">@date.Term.ToString()</p></td>
                         <td><p>@date.Start.ToString()</p></td>
                         <td><p>@date.MaxNumberOfStudents.ToString()</p></td>
-                        <td><p>Taken</p></td>
+                        <td><p style="border-radius: 0px 15px 15px 0px;">Taken</p></td>
                     </tr>
                 }
                 else
                 {
                     <tr class="td-row" onclick="@EditFreeRow">
-                        <td><p>@date.Term.ToString()</p></td>
+                        <td><p style="border-radius: 15px 0px 0px 15px;">@date.Term.ToString()</p></td>
                         <td><p>@date.Start.ToString()</p></td>
                         <td><p>@date.MaxNumberOfStudents.ToString()</p></td>
-                        <td><p>Free</p></td>
+                        <td><p style="border-radius: 0px 15px 15px 0px;">Free</p></td>
                     </tr>
                 }
             }

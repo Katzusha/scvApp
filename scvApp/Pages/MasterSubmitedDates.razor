@@ -27,12 +27,12 @@
             @foreach (var submit in submits)
             {
                 <tr class="td-row">
-                    <td><p>@submit.Firstname @submit.Surname</p></td>
+                    <td><p style="border-radius: 15px 0px 0px 15px;">@submit.Firstname @submit.Surname</p></td>
                     <td><p>@submit.SchoolTitle</p></td>
                     <td><p>@submit.Email</p></td>
                     <td><p>@submit.PhoneNumber</p></td>
                     <td><p>@submit.NumberOfStudents</p></td>
-                    <td><p>@dates.FirstOrDefault(vardate => vardate.Id == submit.Date).Term - @dates.FirstOrDefault(vardate => vardate.Id == submit.Date).Start</p></td>
+                    <td><p style="border-radius: 0px 15px 15px 0px;">@dates.FirstOrDefault(vardate => vardate.Id == submit.Date).Term - @dates.FirstOrDefault(vardate => vardate.Id == submit.Date).Start</p></td>
                 </tr>
             }
         </table>

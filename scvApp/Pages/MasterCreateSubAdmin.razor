@@ -1,0 +1,62 @@
+﻿@page "/Create-User";
+
+@inject NavigationManager NavManager;
+@inject IJSRuntime JsRuntime;
+
+@inject Services.IAdminService adminservice;
+@inject Services.ISchoolService schoolservice;
+@using Models;
+
+<nav class="navbar-master">
+    <div class="container">
+        <a href="/Master/Sub-admins" class="left-button"><div style="margin-top: 12px;">GO<br />BACK</div></a>
+        <a class="welcome-container">CREATE NEW USER</a>
+    </div>
+</nav>
+
+<div class="fullscreen" style="background-color: #ed1164">
+    <div class="login-form">
+        <form onsubmit="@CheckSubmit">
+            <input type="text" placeholder="Firstname" class="textbox" @bind=admin.Firstname><br>
+            <input type="text" placeholder="Surname" class="textbox" @bind=admin.Surname><br>
+            <input type="text" placeholder="Title" class="textbox" @bind=admin.Title><br>
+            <input type="email" placeholder="Email" class="textbox" @bind=admin.Email><br>
+            <input type="text" placeholder="Phone number" class="textbox" @bind=admin.PhoneNumber><br>
+            <input type="text" placeholder="Username" class="textbox" @bind=admin.Username><br>
+            <input type="text" placeholder="Password" class="textbox" @bind=admin.Password><br>
+
+            <select class="textbox" @bind=school.Name>
+                <option>School</option>
+
+                @foreach (var school in schools)
+                {
+                    <option>@school.Name</option>
+                }
+            </select>
+            <button type="submit" class="login-button">Create</button>
+        </form>
+    </div>
+</div>
+
+@code
+{
+    Admin admin = new Admin();
+    School school = new School();
+    List<School> schools = new List<School>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        schools = await schoolservice.GetAllSchools();
+    }
+
+    public async void CheckSubmit()
+    {
+        admin.SchoolId = schools.FirstOrDefault(varschool => varschool.Name == school.Name).Id;
+
+        await adminservice.AddNewAdmin(admin);
+
+        admin = new Admin();
+
+        NavManager.NavigateTo("Master/Sub-admins");
+    }
+}
