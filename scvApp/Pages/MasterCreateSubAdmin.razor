@@ -1,4 +1,4 @@
-﻿@page "/Create-User";
+﻿@page "/Create-User/{adminId}";
 
 @inject NavigationManager NavManager;
 @inject IJSRuntime JsRuntime;
@@ -30,7 +30,14 @@
 
                 @foreach (var school in schools)
                 {
-                    <option>@school.Name</option>
+                    if (school.Id == admin.SchoolId)
+                    {
+                        <option selected>@school.Name</option>
+                    }
+                    else
+                    {
+                        <option>@school.Name</option>
+                    }
                 }
             </select>
             <button type="submit" class="login-button">Create</button>
@@ -40,23 +47,50 @@
 
 @code
 {
+    [Parameter]
+    public string adminId { get; set; }
+
     Admin admin = new Admin();
     School school = new School();
+    List<Admin> admins = new List<Admin>();
     List<School> schools = new List<School>();
 
     protected override async Task OnInitializedAsync()
     {
         schools = await schoolservice.GetAllSchools();
+
+        if (adminId == "0")
+        {
+            admin = new Admin();
+        }
+        else
+        {
+            admins = await adminservice.GetAllAdmins();
+
+            admin = admins.FirstOrDefault(varadmin => varadmin.Id == Int32.Parse(adminId.ToString()));
+        }
     }
 
     public async void CheckSubmit()
     {
-        admin.SchoolId = schools.FirstOrDefault(varschool => varschool.Name == school.Name).Id;
+        if (adminId == "0")
+        {
+            admin.SchoolId = schools.FirstOrDefault(varschool => varschool.Name == school.Name).Id;
 
-        await adminservice.AddNewAdmin(admin);
+            await adminservice.AddNewAdmin(admin);
 
-        admin = new Admin();
+            admin = new Admin();
 
-        NavManager.NavigateTo("Master/Sub-admins");
+            NavManager.NavigateTo("Master/Sub-admins");
+        }
+        else
+        {
+            admin.SchoolId = schools.FirstOrDefault(varschool => varschool.Name == school.Name).Id;
+
+            await adminservice.UpdateAdmin(admin);
+            admin = new Admin();
+
+            NavManager.NavigateTo("Master/Sub-admins");
+        }
     }
 }

@@ -3,6 +3,13 @@
     padding: 0;
 }
 
+input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(130deg) brightness(100%) contrast(100%);
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(130deg) brightness(100%) contrast(100%);
+}
+
 a {
     text-decoration: none;
     cursor: default;

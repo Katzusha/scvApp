@@ -25,14 +25,14 @@
                 <th style="width: calc((100% / 5) * 2);">School</th>
             </tr>
             <tr>
-                <td colspan="4"><a class="add-button" href="Create-user">NEW USER</a></td>
+                <td colspan="4"><a class="add-button" @onclick="CreateAdminRow">NEW USER</a></td>
             </tr>
             
             @foreach (var admin in admins)
             {
                 if (admin.isMasterAdmin != true)
                 {
-                    <tr class="td-row" onclick="@EditAdminRow">
+                    <tr class="td-row" @onclick="(() => EditAdminRow(admin.Email))">
                         <td><p style="border-radius: 15px 0px 0px 15px;">@admin.Firstname.ToString() @admin.Surname.ToString()</p></td>
                         <td><p>@admin.Title</p></td>
                         <td><p>@admin.Email.ToString()</p></td>
@@ -49,14 +49,23 @@
 {
     List<Admin> admins = new List<Admin>();
     List<School> schools = new List<School>();
+
+    public string adminId = "0";
     protected override async Task OnInitializedAsync()
     {
         schools = await schoolservice.GetAllSchools();
         admins = await adminservice.GetAllAdmins();
     }
 
-    public async void EditAdminRow()
+    public async void CreateAdminRow()
     {
-        
+        NavManager.NavigateTo($"/Create-user/{adminId}");
+    }
+
+    public async void EditAdminRow(string email)
+    {
+        adminId = admins.FirstOrDefault(varadmin => varadmin.Email == email).Id.ToString();
+
+        NavManager.NavigateTo($"/Create-user/{adminId}");
     }
 }
