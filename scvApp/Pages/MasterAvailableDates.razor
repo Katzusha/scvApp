@@ -2,13 +2,15 @@
 
 @inject Services.IDateService dateservice;
 @inject Services.ISubmitService submitservice;
+@inject NavigationManager NavManager;
+@inject IJSRuntime JsRuntime;
 @using Models
 
 <nav class="navbar-master">
     <div class="container">
         <a href="/Master/Submited-dates" class="left-button"><div style="margin-top: 12px;">SUBMITED<br />DATES</div></a>
         <a  class="welcome-container">ALL DATES</a>
-        <a class="right-button"><div style="margin-top: 12px; margin-left: -170px;">SUB<br />ADMINS</div></a>
+        <a class="right-button" href="/Master/Sub-admins"><div style="margin-top: 12px; margin-left: -170px;">SUB<br />ADMINS</div></a>
     </div>
 </nav>
 
@@ -22,23 +24,28 @@
                 <th style="width: calc(100% / 4);">Is taken</th>
             </tr>
             <tr>
-                <td colspan="4"><a class="add-button" href="/Create-Date">NEW DATE</a></td>
+                <td colspan="4"><a class="add-button" href="Create-date">NEW DATE</a></td>
             </tr>
             @foreach (var date in dates)
             {
-                <tr class="td-row">
-                    <td><p>@date.Term.ToString()</p></td>
-                    <td><p>@date.Start.ToString()</p></td>
-                    <td><p>@date.MaxNumberOfStudents.ToString()</p></td>
-                    @if (submits.Any(submit => submit.Date == date.Id) == true)
-                    {
+                @if (submits.Any(submit => submit.Date == date.Id) == true)
+                {
+                    <tr class="td-row" @onclick="() => EditFreeRow(date.Id)">
+                        <td><p>@date.Term.ToString()</p></td>
+                        <td><p>@date.Start.ToString()</p></td>
+                        <td><p>@date.MaxNumberOfStudents.ToString()</p></td>
                         <td><p>Taken</p></td>
-                    }
-                    else
-                    {
+                    </tr>
+                }
+                else
+                {
+                    <tr class="td-row" onclick="@EditFreeRow">
+                        <td><p>@date.Term.ToString()</p></td>
+                        <td><p>@date.Start.ToString()</p></td>
+                        <td><p>@date.MaxNumberOfStudents.ToString()</p></td>
                         <td><p>Free</p></td>
-                    }
-                </tr>
+                    </tr>
+                }
             }
         </table>
     </div>
@@ -52,5 +59,15 @@
     {
         dates = await dateservice.GetAllDates();
         submits = await submitservice.GetAllSubmits();
+    }
+
+    public async void EditTakenRow()
+    {
+        await JsRuntime.InvokeVoidAsync("alert", "This date is already taken so please delete the submit before editing the date!");
+    }
+
+    public async void EditFreeRow(int Id)
+    {
+        NavManager.NavigateTo($"/Create-Date");
     }
 }

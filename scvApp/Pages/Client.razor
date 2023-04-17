@@ -59,7 +59,6 @@
                         </table>
                         <input type="time" class="textbox" @bind="submit.Break"/>
                         <br />
-                        <br />
                         <div style="margin: 0 auto; text-align: center;">
                             <button class="school-button-client" style="background-color: #a9d046;" type="button" @onclick="SSGO_Click">
                                 <img src="https://www.scv.si/wp-content/themes/yoo_master2_wp/images/ssgo.svg"><div>@ssgo</div>
@@ -90,7 +89,7 @@
                     </td>
                 </tr>
             </table>
-            <input type="text" style="height: 100px;" class="textbox" placeholder="Note" @bind="submit.Note"/>
+            <textarea style="height: 100px; resize: none;" class="textbox" placeholder="Note" @bind="submit.Note"></textarea>
             <button type="submit" class="login-button-client" formaction="/Thank-you">SUBMIT</button>
         </form>
     </div>

@@ -9,7 +9,7 @@
     <div class="container">
         <a href="/Master/All-dates" class="left-button"><div style="margin-top: 12px;">ALL<br />DATES</div></a>
         <a class="welcome-container">SUBMITED DATES</a>
-        <a class="right-button"><div style="margin-top: 12px; margin-left: -170px;">SUB<br />ADMINS</div></a>
+        <a class="right-button" href="/Master/Sub-admins"><div style="margin-top: 12px; margin-left: -170px;">SUB<br />ADMINS</div></a>
     </div>
 </nav>
 
@@ -32,7 +32,7 @@
                     <td><p>@submit.Email</p></td>
                     <td><p>@submit.PhoneNumber</p></td>
                     <td><p>@submit.NumberOfStudents</p></td>
-                    <td><p>@dates.FirstOrDefault(vardate => vardate.Id == submit.Date).Term</p></td>
+                    <td><p>@dates.FirstOrDefault(vardate => vardate.Id == submit.Date).Term - @dates.FirstOrDefault(vardate => vardate.Id == submit.Date).Start</p></td>
                 </tr>
             }
         </table>

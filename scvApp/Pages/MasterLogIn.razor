@@ -1,10 +1,16 @@
 ﻿@page "/MasterLogIn";
 
+@inject NavigationManager NavManager;
+@inject IJSRuntime JsRuntime;
+
+@inject Services.IAdminService adminservice;
+@using Models;
+
 <div class="fullscreen" style="background-color: #ed1164">
     <div class="login-form">
-        <form>
-            <input type="text" placeholder="eMail" class="textbox"><br>
-            <input type="password" placeholder="Password" class="textbox"><br>
+        <form onsubmit="@LogInCheck">
+            <input type="text" placeholder="eMail" class="textbox" @bind="admin.Username"><br>
+            <input type="password" placeholder="Password" class="textbox" @bind="admin.Password"><br>
             <button type="submit" class="login-button" formaction="/Master/Submited-dates">Log in</button>
         </form>
     </div>
@@ -42,3 +48,43 @@
         </form>
     </div>
 </footer>
+
+@code
+{
+    List<Admin> admins = new List<Admin>();
+    Admin admin = new Admin();
+    Admin login = new Admin();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            admins = await adminservice.GetAllAdmins();
+        }
+        catch (Exception ex)
+        {
+            await JsRuntime.InvokeVoidAsync("alert", ex.InnerException.Message);
+        }
+    }
+
+    public async void LogInCheck()
+    {
+        try
+        {
+            login = admins.FirstOrDefault(LogIninfo => LogIninfo.Username == admin.Username);
+
+            if (login.Password == admin.Password)
+            {
+                NavManager.NavigateTo("/Master/Submited-Dates");
+            }
+            else
+            {
+                await JsRuntime.InvokeVoidAsync("alert", "Wrong username or password. Please try again");
+            }
+        }
+        catch (Exception ex)
+        {
+            await JsRuntime.InvokeVoidAsync("alert", ex.InnerException.Message);
+        }
+    }
+}

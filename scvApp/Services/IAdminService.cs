@@ -1,4 +1,5 @@
-﻿using scvApp.dbcontext;
+﻿using Microsoft.EntityFrameworkCore;
+using scvApp.dbcontext;
 using scvApp.Models;
 
 namespace scvApp.Services
@@ -6,6 +7,8 @@ namespace scvApp.Services
     public interface IAdminService
     {
         Task AddNewAdmin(Admin admin);
+
+        Task<List<Admin>> GetAllAdmins();
     }
 
     public class AdminService : IAdminService
@@ -16,6 +19,14 @@ namespace scvApp.Services
             {
                 await context.Admins.AddAsync(admin);
                 await context.SaveChangesAsync();
+            }
+        }
+
+        public async Task<List<Admin>> GetAllAdmins()
+        {
+            using (var context = new AppDbContext())
+            {
+                return await context.Admins.ToListAsync();
             }
         }
     }
