@@ -9,6 +9,15 @@
 @inject Services.IDateService dateservice;
 @using Models;
 
+<nav class="navbar-master">
+    <div class="container">
+        <a href="/" style="height: 100px; float: left;">
+            <img src="https://www.scv.si/wp-content/themes/yoo_master2_wp/images/scv.svg" style="height: 100px; float: left; position: absolute; left: 0px; text-decoration: none;" />
+        </a>
+        <a href="/MasterLogIn" class="welcome-container">WELCOME</a>
+    </div>
+</nav>
+
 <div class="fullscreen" style="background-color: #ed1164">
     <div class="client-form">
         <form onsubmit="@CheckSubmit" style="margin-bottom: -80px;">
@@ -28,7 +37,8 @@
                         <input type="text" class="textbox" @bind="submit.SchoolTitle" placeholder="School title" required/>
                         <br />
                         <input type="text" class="textbox" @bind="submit.Address" placeholder="School address" required/>
-                        <br />
+                    </td>
+                    <td class="right-td-client">
                         <input type="number" class="textbox" min="5" max="9" @bind="submit.Class" placeholder="Class" required />
                         <br />
                         <select class="textbox" @bind="date.Term" @onselectionchange="UpdateMaxNumberOfStudents" required>
@@ -45,8 +55,6 @@
                         </select>
                         <br />
                         <input type="number" placeholder="Number of students" max="@maxnumberofstudents" min="0" class="textbox" @bind="submit.NumberOfStudents" required />
-                    </td>
-                    <td class="right-td-client">
                         <table style="width:100%;">
                             <tr>
                                 <td>
@@ -59,6 +67,8 @@
                         </table>
                         <input type="time" class="textbox" @bind="submit.Break"/>
                         <br />
+                    </td>
+                    <td class="right-td-client" style="width: 30%;">
                         <div style="margin: 0 auto; text-align: center;">
                             <button class="school-button-client" style="background-color: #a9d046;" type="button" @onclick="SSGO_Click">
                                 <img src="https://www.scv.si/wp-content/themes/yoo_master2_wp/images/ssgo.svg"><div>@ssgo</div>

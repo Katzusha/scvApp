@@ -1,51 +1,166 @@
-﻿@page "/Create-Date";
+﻿@page "/Submited-date/{dateId}";
 
 @inject NavigationManager NavManager;
 @inject IJSRuntime JsRuntime;
 
 @inject Services.IDateService dateservice;
+@inject Services.ISubmitService submitservice;
 
 @using Models
 
 <nav class="navbar-master">
     <div class="container">
         <a href="/Master/All-dates" class="left-button"><div style="margin-top: 12px;">GO<br />BACK</div></a>
-        <a class="welcome-container">CREATE NEW DATE</a>
+        <a class="welcome-container">SUBMITED DATE</a>
     </div>
 </nav>
 
 <div class="fullscreen" style="background-color: #ed1164">
-    <div class="login-form">
+    <div class="client-form">
         <form onsubmit="@CheckSubmit">
-            <input type="date" placeholder="Date" class="textbox" @bind=date.Term><br>
-            <input type="time" placeholder="Hour" class="textbox" @bind=date.Start><br>
-            <input type="number" placeholder="Max number of students" class="textbox" @bind=date.MaxNumberOfStudents><br>
-            <button type="submit" formaction="/Master/Submited-dates" class="login-button">Create</button>
+            <table style="width: 100%;">
+                <tr>
+                    <td class="left-td-client" style="width: 30%;">
+                        <input type="text" class="textbox" @bind="submit.Firstname" placeholder="Firstname" readonly/>
+                        <br />
+                        <input type="text" class="textbox" @bind="submit.Surname" placeholder="Surname" readonly />
+                        <br />
+                        <input type="date" class="textbox" @bind="submit.Birth" placeholder="Birth" readonly />
+                        <br />
+                        <input type="email" class="textbox" @bind="submit.Email" placeholder="Email" readonly />
+                        <br />
+                        <input type="text" class="textbox" @bind="submit.PhoneNumber" placeholder="Phone number" readonly />
+                        <br />
+                        <input type="text" class="textbox" @bind="submit.SchoolTitle" placeholder="School title" readonly />
+                        <br />
+                        <input type="text" class="textbox" @bind="submit.Address" placeholder="School address" readonly />
+                    </td>
+                    <td class="right-td-client" style="width: 30%;">
+                        <input type="number" class="textbox" min="5" max="9" @bind="submit.Class" placeholder="Class" readonly />
+                        <br />
+                        <input type="text" class="textbox" @bind="date.Term" readonly>
+                        <br />
+                        <input type="number" placeholder="Number of students" min="0" class="textbox" @bind="submit.NumberOfStudents" readonly />
+                        <table style="width:100%;">
+                            <tr>
+                                <td>
+                                    <input type="time" class="textbox" readonly @bind="submit.Start" />
+                                </td>
+                                <td>
+                                    <input type="time" class="textbox" readonly @bind="submit.End" />
+                                </td>
+                            </tr>
+                        </table>
+                        <input type="time" class="textbox" @bind="submit.Break" />
+                        <br />
+
+                        <select class="textbox" @bind="submit.Type" required>
+                            <option>Lokacija ogleda</option>
+                            <option>ŠCV</option>
+                            <option>MIC</option>
+                            <option>Obisk OŠ</option>
+                        </select>
+                        
+                    </td>
+                    <td class="right-td-client" style="width: 30%;">
+                        <div style="margin: 0 auto; text-align: left;">
+                            <button class="school-button-client" style="background-color: #0094d9; height: 75px; width: 75px;" type="button">
+                                <img src="https://www.scv.si/wp-content/themes/yoo_master2_wp/images/ers.svg" style="width: 50px;"><div>@ers</div>
+                            </button>
+                            <select class="textbox" @bind="submit.Type" style="width: calc(100% - 90px);" required>
+                                <option>Lokacija ogleda</option>
+                                <option>ŠCV</option>
+                                <option>MIC</option>
+                                <option>Obisk OŠ</option>
+                            </select>
+
+                            <br />
+                            <button class="school-button-client" style="background-color: #ee5ba0; height: 75px; width: 75px;" type="button">
+                                <img src="https://www.scv.si/wp-content/themes/yoo_master2_wp/images/ssd.svg" style="width: 50px;"><div>@ssd</div>
+                            </button>
+                            <select class="textbox" @bind="submit.Type" style="width: calc(100% - 90px);" required>
+                                <option>Lokacija ogleda</option>
+                                <option>ŠCV</option>
+                                <option>MIC</option>
+                                <option>Obisk OŠ</option>
+                            </select>
+
+                            <br />
+                            <button class="school-button-client" style="background-color: #ffca05; height: 75px; width: 75px;" type="button">
+                                <img src="https://www.scv.si/wp-content/themes/yoo_master2_wp/images/gim.svg" style="width: 50px;"><div>@gim</div>
+                            </button>
+                            <select class="textbox" @bind="submit.Type" style="width: calc(100% - 90px);" required>
+                                <option>Lokacija ogleda</option>
+                                <option>ŠCV</option>
+                                <option>MIC</option>
+                                <option>Obisk OŠ</option>
+                            </select>
+
+                            <br />  
+
+                            <button class="school-button-client" style="background-color: #a9d046; height: 75px; width: 75px;" type="button">
+                                <img src="https://www.scv.si/wp-content/themes/yoo_master2_wp/images/ssgo.svg" style="width: 50px;"><div>@ssgo</div>
+                            </button>
+                            <select class="textbox" @bind="submit.Type" style="width: calc(100% - 90px);" required>
+                                <option>Lokacija ogleda</option>
+                                <option>ŠCV</option>
+                                <option>MIC</option>
+                                <option>Obisk OŠ</option>
+                            </select>
+
+                            <br />
+
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <textarea style="height: 100px; resize: none;" class="textbox" placeholder="Note" @bind="submit.Note"></textarea>
+            <button type="submit" class="login-button-client" formaction="/Thank-you">SUBMIT</button>
         </form>
     </div>
 </div>
 
-@code 
+@code
 {
+    [Parameter]
+    public string dateId { get; set; }
+
+    string ers, ssd, gim, ssgo = "";
+
     Date date = new Date();
+    Submit submit = new Submit();
+    List<Date> dates = new List<Date>();
+    List<Submit> submits = new List<Submit>();
 
     protected override async Task OnInitializedAsync()
     {
-        date.Term = DateOnly.Parse(DateTime.Today.ToShortDateString());
+        if (dateId == "0")
+        {
+            date.Term = DateOnly.Parse(DateTime.Today.ToShortDateString());
+        }
+        else
+        {
+            dates = await dateservice.GetAllDates();
+
+            date = dates.FirstOrDefault(vardate => vardate.Id.ToString() == dateId);
+        }
     }
 
     public async Task CheckSubmit()
     {
-        try
+        if (dateId == "0")
         {
             await dateservice.AddNewDate(date);
 
             date = new Date();
             NavManager.NavigateTo("/Master/All-dates");
         }
-        catch (Exception ex)
+        else
         {
-            await JsRuntime.InvokeVoidAsync("alert", ex.InnerException.Message);
+            await dateservice.UpdateDate(date);
+
+            date = new Date();
+            NavManager.NavigateTo("/Master/All-dates");
         }
     }
 }

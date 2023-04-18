@@ -63,22 +63,22 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50%;
-    max-width: 1100px;
+    width: 75%;
     min-width: 710px;
+    margin-top: 20px;
     text-align: center;
 }
 
 .left-td-client {
     padding: 10px;
     padding-right: 40px;
-    width: 50%;
+    width: 30%;
 }
 
 .right-td-client {
     padding: 10px;
     padding-left: 40px;
-    width: 50%;
+    width: 30%;
 }
 
 .fullscreen {

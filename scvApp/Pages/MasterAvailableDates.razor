@@ -24,13 +24,13 @@
                 <th style="width: calc(100% / 4);">Is taken</th>
             </tr>
             <tr>
-                <td colspan="4"><a class="add-button" href="Create-date">NEW DATE</a></td>
+                <td colspan="4"><a class="add-button" onclick="@CreateNewRow">NEW DATE</a></td>
             </tr>
             @foreach (var date in dates)
             {
                 @if (submits.Any(submit => submit.Date == date.Id) == true)
                 {
-                    <tr class="td-row" @onclick="() => EditFreeRow(date.Id)">
+                    <tr class="td-row" onclick="@EditTakenRow">
                         <td><p style="border-radius: 15px 0px 0px 15px;">@date.Term.ToString()</p></td>
                         <td><p>@date.Start.ToString()</p></td>
                         <td><p>@date.MaxNumberOfStudents.ToString()</p></td>
@@ -39,7 +39,7 @@
                 }
                 else
                 {
-                    <tr class="td-row" onclick="@EditFreeRow">
+                    <tr class="td-row" @onclick="(() => EditFreeRow(date.Id.ToString()))">
                         <td><p style="border-radius: 15px 0px 0px 15px;">@date.Term.ToString()</p></td>
                         <td><p>@date.Start.ToString()</p></td>
                         <td><p>@date.MaxNumberOfStudents.ToString()</p></td>
@@ -53,6 +53,7 @@
 
 @code
 {
+    string dateId = "0";
     List<Date> dates = new List<Date>();
     List<Submit> submits = new List<Submit>();
     protected override async Task OnInitializedAsync()
@@ -66,8 +67,13 @@
         await JsRuntime.InvokeVoidAsync("alert", "This date is already taken so please delete the submit before editing the date!");
     }
 
-    public async void EditFreeRow(int Id)
+    public async void CreateNewRow()
     {
-        NavManager.NavigateTo($"/Create-Date");
+        NavManager.NavigateTo($"/Create-Date/{dateId}");
+    }
+
+    public async void EditFreeRow(string Id)
+    {
+        NavManager.NavigateTo($"/Create-Date/{Id}");
     }
 }
