@@ -1,3 +1,23 @@
+@keyframes Thank-you-popup {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.thank-you {
+    animation-name: Thank-you-popup;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    width: 500px;
+    margin-right: -60px;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -329,7 +349,7 @@ body {
 
 .fullscreen-table {
     padding-top: 140px;
-    width: 90%;
+    width: 95%;
     margin: 0 auto;
 }
 
@@ -355,15 +375,60 @@ th {
     cursor: default;
 }
 
+.reject-button {
+    position: absolute;
+    right: 0;
+    top: 1px;
+    border: 0px solid;
+    border-radius: 15px;
+    height: 33px;
+    width: 0%;
+    overflow: hidden;
+    background-color: #FF2525;
+    color: white;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: bolder;
+    transition: .2s ease;
+}
+
+.td-row:hover .reject-button {
+    width: 48%;
+    transition: .2s ease;
+}
+
+.accept-button {
+    position: absolute;
+    right: 0%;
+    top: 1px;
+    border: 0px solid;
+    border-radius: 15px;
+    height: 33px;
+    width: 0%;
+    overflow: hidden;
+    background-color: #25FF25;
+    color: white;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: bolder;
+    transition: .2s ease;
+}
+
+.td-row:hover .accept-button {
+    width: 48%;
+    right: 50%;
+    transition: .2s ease;
+}
+
 .td-row:hover td p {
     background-color: #f2327a;
-    cursor: pointer;
 }
 
 .td-row td p {
     background-color: rgba(0, 0, 0, 0.2);
     height: 30px;
     padding-top: 3px;
+    text-overflow: ellipsis;
     overflow: hidden;
 }
 

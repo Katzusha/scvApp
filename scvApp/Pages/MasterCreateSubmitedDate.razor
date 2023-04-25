@@ -1,17 +1,18 @@
-﻿@page "/Submited-date/{dateId}";
+﻿@page "/Submited-date/{submitId}";
 
 @inject NavigationManager NavManager;
 @inject IJSRuntime JsRuntime;
 
 @inject Services.IDateService dateservice;
 @inject Services.ISubmitService submitservice;
+@inject Services.ITeacherService teacherservice;
 
 @using Models
 
 <nav class="navbar-master">
     <div class="container">
-        <a href="/Master/All-dates" class="left-button"><div style="margin-top: 12px;">GO<br />BACK</div></a>
-        <a class="welcome-container">SUBMITED DATE</a>
+        <a href="/Master/Submited-dates" class="left-button"><div style="margin-top: 12px;">POJDI<br />NAZAJ</div></a>
+        <a class="welcome-container">PRIJAVLJENI TERMINI</a>
     </div>
 </nav>
 
@@ -21,26 +22,24 @@
             <table style="width: 100%;">
                 <tr>
                     <td class="left-td-client" style="width: 30%;">
-                        <input type="text" class="textbox" @bind="submit.Firstname" placeholder="Firstname" readonly/>
+                        <input type="text" class="textbox" @bind="submit.Firstname" placeholder="Ime" readonly/>
                         <br />
-                        <input type="text" class="textbox" @bind="submit.Surname" placeholder="Surname" readonly />
+                        <input type="text" class="textbox" @bind="submit.Surname" placeholder="Priimek" readonly />
                         <br />
-                        <input type="date" class="textbox" @bind="submit.Birth" placeholder="Birth" readonly />
+                        <input type="email" class="textbox" @bind="submit.Email" placeholder="E-poštni naslov" readonly />
                         <br />
-                        <input type="email" class="textbox" @bind="submit.Email" placeholder="Email" readonly />
+                        <input type="text" class="textbox" @bind="submit.PhoneNumber" placeholder="Telefonska številka" readonly />
                         <br />
-                        <input type="text" class="textbox" @bind="submit.PhoneNumber" placeholder="Phone number" readonly />
+                        <input type="text" class="textbox" @bind="submit.SchoolTitle" placeholder="Naziv šole" readonly />
                         <br />
-                        <input type="text" class="textbox" @bind="submit.SchoolTitle" placeholder="School title" readonly />
-                        <br />
-                        <input type="text" class="textbox" @bind="submit.Address" placeholder="School address" readonly />
+                        <input type="text" class="textbox" @bind="submit.Address" placeholder="Naslov šole" readonly />
                     </td>
                     <td class="right-td-client" style="width: 30%;">
-                        <input type="number" class="textbox" min="5" max="9" @bind="submit.Class" placeholder="Class" readonly />
+                        <input type="number" class="textbox" min="5" max="9" @bind="submit.Class" placeholder="Razrednja stopnja" readonly />
                         <br />
                         <input type="text" class="textbox" @bind="date.Term" readonly>
                         <br />
-                        <input type="number" placeholder="Number of students" min="0" class="textbox" @bind="submit.NumberOfStudents" readonly />
+                        <input type="number" placeholder="Število učencev" min="0" class="textbox" @bind="submit.NumberOfStudents" readonly />
                         <table style="width:100%;">
                             <tr>
                                 <td>
@@ -67,6 +66,7 @@
                             <button class="school-button-client" style="background-color: #0094d9; height: 75px; width: 75px;" type="button">
                                 <img src="https://www.scv.si/wp-content/themes/yoo_master2_wp/images/ers.svg" style="width: 50px;"><div>@ers</div>
                             </button>
+                            
                             <select class="textbox" @bind="submit.Type" style="width: calc(100% - 90px);" required>
                                 <option>Lokacija ogleda</option>
                                 <option>ŠCV</option>
@@ -123,32 +123,36 @@
 @code
 {
     [Parameter]
-    public string dateId { get; set; }
+    public string submitId { get; set; }
 
     string ers, ssd, gim, ssgo = "";
 
     Date date = new Date();
     Submit submit = new Submit();
+    Teacher teacher = new Teacher();
     List<Date> dates = new List<Date>();
     List<Submit> submits = new List<Submit>();
+    List<Teacher> teachers = new List<Teacher>();
 
     protected override async Task OnInitializedAsync()
     {
-        if (dateId == "0")
+        if (submitId == "0")
         {
             date.Term = DateOnly.Parse(DateTime.Today.ToShortDateString());
         }
         else
         {
             dates = await dateservice.GetAllDates();
+            submits = await submitservice.GetAllSubmits();
 
-            date = dates.FirstOrDefault(vardate => vardate.Id.ToString() == dateId);
+            submit = submits.FirstOrDefault(varsubmit => varsubmit.Id.ToString() == submitId);
+            date = dates.FirstOrDefault(vardate => vardate.Id == submit.Date);
         }
     }
 
     public async Task CheckSubmit()
     {
-        if (dateId == "0")
+        if (submitId == "0")
         {
             await dateservice.AddNewDate(date);
 
@@ -158,9 +162,11 @@
         else
         {
             await dateservice.UpdateDate(date);
+            await submitservice.UpdateSubmit(submit);
 
             date = new Date();
-            NavManager.NavigateTo("/Master/All-dates");
+            submit = new Submit();
+            NavManager.NavigateTo("/Master/Submited-dates");
         }
     }
 }

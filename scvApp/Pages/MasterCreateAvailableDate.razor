@@ -9,18 +9,18 @@
 
 <nav class="navbar-master">
     <div class="container">
-        <a href="/Master/All-dates" class="left-button"><div style="margin-top: 12px;">GO<br />BACK</div></a>
-        <a class="welcome-container">CREATE NEW DATE</a>
+        <a href="/Master/All-dates" class="left-button"><div style="margin-top: 12px;">POJDI<br />NAZAJ</div></a>
+        <a class="welcome-container">USTVARI NOV TERMIN</a>
     </div>
 </nav>
 
 <div class="fullscreen" style="background-color: #ed1164">
     <div class="login-form">
         <form onsubmit="@CheckSubmit">
-            <input type="date" placeholder="Date" class="textbox" @bind=date.Term><br>
-            <input type="time" placeholder="Hour" class="textbox" @bind=date.Start><br>
-            <input type="number" placeholder="Max number of students" class="textbox" @bind=date.MaxNumberOfStudents><br>
-            <button type="submit" formaction="/Master/Submited-dates" class="login-button">Create</button>
+            <input type="date" placeholder="Datum" class="textbox" @bind=date.Term><br>
+            <input type="time" placeholder="Ura" class="textbox" @bind=date.Start><br>
+            <input type="number" placeholder="Max število učencev" class="textbox" @bind=date.MaxNumberOfStudents><br>
+            <button type="submit" formaction="/Master/Submited-dates" class="login-button">Ustvari</button>
         </form>
     </div>
 </div>

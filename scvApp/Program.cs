@@ -12,6 +12,7 @@ builder.Services.AddSingleton<ISchoolService, SchoolService>();
 builder.Services.AddSingleton<ISubmitService, SubmitService>();
 builder.Services.AddSingleton<ISchoolSubmitService, SchoolSubmitService>();
 builder.Services.AddSingleton<IDateService, DateService>();
+builder.Services.AddSingleton<ITeacherService, TeacherService>();
 
 var app = builder.Build();
 

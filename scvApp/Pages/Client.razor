@@ -14,7 +14,7 @@
         <a href="/" style="height: 100px; float: left;">
             <img src="https://www.scv.si/wp-content/themes/yoo_master2_wp/images/scv.svg" style="height: 100px; float: left; position: absolute; left: 0px; text-decoration: none;" />
         </a>
-        <a href="/MasterLogIn" class="welcome-container">WELCOME</a>
+        <a href="/MasterLogIn" class="welcome-container">DOBRODOŠLI</a>
     </div>
 </nav>
 
@@ -24,25 +24,23 @@
             <table style="width: 100%;">
                 <tr>
                     <td class="left-td-client">
-                        <input type="text" class="textbox" @bind="submit.Firstname" placeholder="Firstname" required/>
+                        <input type="text" class="textbox" @bind="submit.Firstname" placeholder="Ime" required/>
                         <br />
-                        <input type="text" class="textbox" @bind="submit.Surname" placeholder="Surname" required/>
+                        <input type="text" class="textbox" @bind="submit.Surname" placeholder="Priimek" required/>
                         <br />
-                        <input type="date" class="textbox" @bind="birth" placeholder="Birth" required/>
+                        <input type="email" class="textbox" @bind="submit.Email" placeholder="E-pošta" required/>
                         <br />
-                        <input type="email" class="textbox" @bind="submit.Email" placeholder="Email" required/>
+                        <input type="text" class="textbox" @bind="submit.PhoneNumber" placeholder="Telefonska številka" required/>
                         <br />
-                        <input type="text" class="textbox" @bind="submit.PhoneNumber" placeholder="Phone number" required/>
+                        <input type="text" class="textbox" @bind="submit.SchoolTitle" placeholder="Naziv šole" required/>
                         <br />
-                        <input type="text" class="textbox" @bind="submit.SchoolTitle" placeholder="School title" required/>
-                        <br />
-                        <input type="text" class="textbox" @bind="submit.Address" placeholder="School address" required/>
+                        <input type="text" class="textbox" @bind="submit.Address" placeholder="Naslov šole" required/>
                     </td>
                     <td class="right-td-client">
-                        <input type="number" class="textbox" min="5" max="9" @bind="submit.Class" placeholder="Class" required />
+                        <input type="number" class="textbox" min="5" max="9" @bind="submit.Class" placeholder="Razredna stopnja" required />
                         <br />
                         <select class="textbox" @bind="date.Term" @onselectionchange="UpdateMaxNumberOfStudents" required>
-                            <option selected>Date</option>
+                            <option selected>Termin</option>
 
                             @foreach (var date in dates.OrderBy(vardate => vardate.Term).ToList())
                             {
@@ -54,7 +52,7 @@
 
                         </select>
                         <br />
-                        <input type="number" placeholder="Number of students" max="@maxnumberofstudents" min="0" class="textbox" @bind="submit.NumberOfStudents" required />
+                        <input type="number" placeholder="Število učencev" max="@maxnumberofstudents" min="0" class="textbox" @bind="submit.NumberOfStudents" required />
                         <table style="width:100%;">
                             <tr>
                                 <td>
@@ -86,7 +84,7 @@
 
                             <br />
                             <button class="school-button-client-all" style="background-color: rgba(0, 0, 0, 0.2);" type="button" @onclick="All_Click">
-                                ALL
+                                VSE
                             </button>
                             <br />
                             <select class="textbox" @bind="submit.Type" required>
@@ -100,7 +98,7 @@
                 </tr>
             </table>
             <textarea style="height: 100px; resize: none;" class="textbox" placeholder="Note" @bind="submit.Note"></textarea>
-            <button type="submit" class="login-button-client" formaction="/Thank-you">SUBMIT</button>
+            <button type="submit" class="login-button-client" formaction="/Thank-you">ODDAJ</button>
         </form>
     </div>
 </div>
@@ -108,7 +106,6 @@
 @code {
     string numberofstudents;
     int maxnumberofstudents = 0;
-    DateTime birth;
 
     Date date = new Date();
     List<Date> dates = new List<Date>();

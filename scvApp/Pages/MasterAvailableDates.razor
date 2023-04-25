@@ -8,9 +8,9 @@
 
 <nav class="navbar-master">
     <div class="container">
-        <a href="/Master/Submited-dates" class="left-button"><div style="margin-top: 12px;">SUBMITED<br />DATES</div></a>
-        <a  class="welcome-container">ALL DATES</a>
-        <a class="right-button" href="/Master/Sub-admins"><div style="margin-top: 12px; margin-left: -170px;">SUB<br />ADMINS</div></a>
+        <a href="/Master/Submited-dates" class="left-button"><div style="margin-top: 12px;">PRIJAVLJENI<br />TERMINI</div></a>
+        <a  class="welcome-container">VSI TERMINI</a>
+        <a class="right-button" href="/Master/Sub-admins"><div style="margin-top: 12px; margin-left: -170px;">POD<br />ADMINI</div></a>
     </div>
 </nav>
 
@@ -18,13 +18,13 @@
     <div class="fullscreen-table">
         <table>
             <tr>
-                <th style="width: calc(100% / 4);">Date</th>
-                <th style="width: calc(100% / 4);">Hour</th>
-                <th style="width: calc(100% / 4);">Max number of students</th>
-                <th style="width: calc(100% / 4);">Is taken</th>
+                <th style="width: calc(100% / 4);">DATUM</th>
+                <th style="width: calc(100% / 4);">URA</th>
+                <th style="width: calc(100% / 4);">MAX ŠTEVILO UČENCEV</th>
+                <th style="width: calc(100% / 4);">JE ZASEDEN</th>
             </tr>
             <tr>
-                <td colspan="4"><a class="add-button" onclick="@CreateNewRow">NEW DATE</a></td>
+                <td colspan="4"><a class="add-button" onclick="@CreateNewRow">NOV TERMIN</a></td>
             </tr>
             @foreach (var date in dates)
             {
@@ -34,7 +34,7 @@
                         <td><p style="border-radius: 15px 0px 0px 15px;">@date.Term.ToString()</p></td>
                         <td><p>@date.Start.ToString()</p></td>
                         <td><p>@date.MaxNumberOfStudents.ToString()</p></td>
-                        <td><p style="border-radius: 0px 15px 15px 0px;">Taken</p></td>
+                        <td><p style="border-radius: 0px 15px 15px 0px;">Zaseden</p></td>
                     </tr>
                 }
                 else
@@ -43,7 +43,7 @@
                         <td><p style="border-radius: 15px 0px 0px 15px;">@date.Term.ToString()</p></td>
                         <td><p>@date.Start.ToString()</p></td>
                         <td><p>@date.MaxNumberOfStudents.ToString()</p></td>
-                        <td><p style="border-radius: 0px 15px 15px 0px;">Free</p></td>
+                        <td><p style="border-radius: 0px 15px 15px 0px;">Prost</p></td>
                     </tr>
                 }
             }

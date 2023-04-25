@@ -1,11 +1,17 @@
 ﻿@page "/GIMLogIn";
 
+@inject Services.IAdminService adminservice;
+@using Models;
+
+@inject IJSRuntime JsRuntime;
+@inject NavigationManager NavManager;
+
 <div class="fullscreen" style="background-color: #ffca05">
     <div class="login-form">
-        <form>
-            <input type="text" placeholder="eMail" class="textbox"><br>
-            <input type="password" placeholder="Password" class="textbox"><br>
-            <button type="submit" class="login-button">Log in</button>
+        <form onsubmit="@LogInCheck">
+            <input type="text" placeholder="Uorabniško ime" class="textbox"><br>
+            <input type="password" placeholder="Geslo" class="textbox"><br>
+            <button type="submit" class="login-button">PRIJAVA</button>
         </form>
     </div>
 </div>
@@ -42,3 +48,42 @@
         </form>
     </div>
 </footer>
+
+@code
+{
+    List<Admin> admins = new List<Admin>();
+    Admin login = new Admin();
+
+    protected override async Task OnInitializedAsync()
+    {
+        admins = await adminservice.GetAllAdmins();
+    }
+
+    public async void LogInCheck()
+    {
+        try
+        {
+            bool logincheck = false;
+            foreach (var user in admins)
+            {
+                if (user.SchoolId == 1)
+                {
+                    if (user.Username == login.Username && user.Password == login.Password)
+                    {
+                        NavManager.NavigateTo("/");
+                        logincheck = true;
+                    }
+                }
+            }
+
+            if (logincheck == false)
+            {
+                await JsRuntime.InvokeVoidAsync("alert", "Wrong username or password. Please try again");
+            }
+        }
+        catch (Exception ex)
+        {
+            await JsRuntime.InvokeVoidAsync("alert", ex.InnerException.Message);
+        }
+    }
+}

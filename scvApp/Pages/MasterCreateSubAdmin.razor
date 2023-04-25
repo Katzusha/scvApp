@@ -9,24 +9,24 @@
 
 <nav class="navbar-master">
     <div class="container">
-        <a href="/Master/Sub-admins" class="left-button"><div style="margin-top: 12px;">GO<br />BACK</div></a>
-        <a class="welcome-container">CREATE NEW USER</a>
+        <a href="/Master/Sub-admins" class="left-button"><div style="margin-top: 12px;">POJDI<br />NAZAJ</div></a>
+        <a class="welcome-container">USTVARI NOVEGA UPORABNIKA</a>
     </div>
 </nav>
 
 <div class="fullscreen" style="background-color: #ed1164">
     <div class="login-form">
         <form onsubmit="@CheckSubmit">
-            <input type="text" placeholder="Firstname" class="textbox" @bind=admin.Firstname><br>
-            <input type="text" placeholder="Surname" class="textbox" @bind=admin.Surname><br>
-            <input type="text" placeholder="Title" class="textbox" @bind=admin.Title><br>
-            <input type="email" placeholder="Email" class="textbox" @bind=admin.Email><br>
-            <input type="text" placeholder="Phone number" class="textbox" @bind=admin.PhoneNumber><br>
-            <input type="text" placeholder="Username" class="textbox" @bind=admin.Username><br>
-            <input type="text" placeholder="Password" class="textbox" @bind=admin.Password><br>
+            <input type="text" placeholder="Ime" class="textbox" @bind=admin.Firstname><br>
+            <input type="text" placeholder="Priimek" class="textbox" @bind=admin.Surname><br>
+            <input type="text" placeholder="Nazim" class="textbox" @bind=admin.Title><br>
+            <input type="email" placeholder="E-poštni naslov" class="textbox" @bind=admin.Email><br>
+            <input type="text" placeholder="Telefonska številka" class="textbox" @bind=admin.PhoneNumber><br>
+            <input type="text" placeholder="Uporabniško ime" class="textbox" @bind=admin.Username><br>
+            <input type="text" placeholder="Geslo" class="textbox" @bind=admin.Password><br>
 
             <select class="textbox" @bind=school.Name>
-                <option>School</option>
+                <option>Šola</option>
 
                 @foreach (var school in schools)
                 {
@@ -40,7 +40,7 @@
                     }
                 }
             </select>
-            <button type="submit" class="login-button">Create</button>
+            <button type="submit" class="login-button">Ustvari</button>
         </form>
     </div>
 </div>
