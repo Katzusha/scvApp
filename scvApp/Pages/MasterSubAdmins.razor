@@ -32,11 +32,15 @@
             {
                 if (admin.isMasterAdmin != true)
                 {
-                    <tr class="td-row" @onclick="(() => EditAdminRow(admin.Email))">
-                        <td><p style="border-radius: 15px 0px 0px 15px;">@admin.Firstname.ToString() @admin.Surname.ToString()</p></td>
-                        <td><p>@admin.Title</p></td>
-                        <td><p>@admin.Email.ToString()</p></td>
-                        <td><p style="border-radius: 0px 15px 15px 0px;">@schools.FirstOrDefault(school => school.Id == admin.SchoolId).Name</p></td>
+                    <tr class="td-row">
+                        <td><p @onclick="(() => EditAdminRow(admin.Id))" style="border-radius: 15px 0px 0px 15px;">@admin.Firstname.ToString() @admin.Surname.ToString()</p></td>
+                        <td><p @onclick="(() => EditAdminRow(admin.Id))">@admin.Title</p></td>
+                        <td><p @onclick="(() => EditAdminRow(admin.Id))">@admin.Email.ToString()</p></td>
+                        <td style="position: relative;">
+                            <p style="border-radius: 0px 15px 15px 0px;">@schools.FirstOrDefault(school => school.Id == admin.SchoolId).Name</p>
+
+                            <button class="delete-button" @onclick="(() => DeleteAdminRow(admin.Id))">IZBRIŠI</button>
+                        </td>
                     </tr>
                 }
             }
@@ -50,6 +54,8 @@
     List<Admin> admins = new List<Admin>();
     List<School> schools = new List<School>();
 
+    Admin admin = new Admin();
+
     public string adminId = "0";
     protected override async Task OnInitializedAsync()
     {
@@ -62,10 +68,19 @@
         NavManager.NavigateTo($"/Create-user/{adminId}");
     }
 
-    public async void EditAdminRow(string email)
+    public async void EditAdminRow(int id)
     {
-        adminId = admins.FirstOrDefault(varadmin => varadmin.Email == email).Id.ToString();
+        adminId = admins.FirstOrDefault(varadmin => varadmin.Id == id).Id.ToString();
 
         NavManager.NavigateTo($"/Create-user/{adminId}");
+    }
+
+    public async void DeleteAdminRow(int id)
+    {
+        admin = admins.FirstOrDefault(varadmin => varadmin.Id == id);
+
+        await adminservice.DeleteAdmin(admin);
+
+        NavManager.NavigateTo("/Master/Sub-admins");
     }
 }

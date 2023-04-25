@@ -22,8 +22,8 @@
                 <th style="width: calc(100% / 6);">ŠOLA</th>
                 <th style="width: calc(100% / 6);">EPOŠTA</th>
                 <th style="width: calc(100% / 6);">TELEFONSKA ŠTEVILKA</th>
-                <th style="width: calc(100% / 6);">ŠTEVILO UČENCEV</th>
                 <th style="width: calc(100% / 6);">TERMIN</th>
+                <th style="width: calc(100% / 6);">ŠTEVILO UČENCEV</th>
             </tr>
             @foreach (var submit in submits)
             {
@@ -32,9 +32,9 @@
                     <td><p @onclick="(() => EditSubmitRow(submit.Id))">@submit.SchoolTitle</p></td>
                     <td><p @onclick="(() => EditSubmitRow(submit.Id))">@submit.Email</p></td>
                     <td><p @onclick="(() => EditSubmitRow(submit.Id))">@submit.PhoneNumber</p></td>
-                    <td><p @onclick="(() => EditSubmitRow(submit.Id))">@submit.NumberOfStudents</p></td>
+                    <td><p>@dates.FirstOrDefault(vardate => vardate.Id == submit.Date).Term - @dates.FirstOrDefault(vardate => vardate.Id == submit.Date).Start</p></td>
                     <td style="position: relative;">
-                        <p style="border-radius: 0px 15px 15px 0px;">@dates.FirstOrDefault(vardate => vardate.Id == submit.Date).Term - @dates.FirstOrDefault(vardate => vardate.Id == submit.Date).Start</p>
+                        <p style="border-radius: 0px 15px 15px 0px;" @onclick="(() => EditSubmitRow(submit.Id))">@submit.NumberOfStudents</p>
 
                         @if (submit.isConfirmed == false)
                         {
@@ -43,7 +43,7 @@
                         }
                         else
                         {
-                            <button class="reject-button" @onclick="(() => ReturnSubmitRow(submit.Id))">POVRNI</button>
+                            <button class="delete-button" @onclick="(() => ReturnSubmitRow(submit.Id))">POVRNI</button>
                         }
                     </td>
                 </tr>

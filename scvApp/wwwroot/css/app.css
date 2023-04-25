@@ -384,13 +384,18 @@ th {
     height: 33px;
     width: 0%;
     overflow: hidden;
-    background-color: #FF2525;
+    background-color: #500123;
     color: white;
     cursor: pointer;
     font-size: 24px;
     font-weight: bolder;
     transition: .2s ease;
 }
+
+    .reject-button:hover {
+        background-color: #8f0c49;
+        transition: .2s ease;
+    }
 
 .td-row:hover .reject-button {
     width: 48%;
@@ -406,7 +411,7 @@ th {
     height: 33px;
     width: 0%;
     overflow: hidden;
-    background-color: #25FF25;
+    background-color: #a8094e;
     color: white;
     cursor: pointer;
     font-size: 24px;
@@ -414,14 +419,47 @@ th {
     transition: .2s ease;
 }
 
+    .accept-button:hover {
+        background-color: #c90756;
+        transition: .2s ease;
+    }
+
 .td-row:hover .accept-button {
     width: 48%;
     right: 50%;
     transition: .2s ease;
 }
 
+.delete-button {
+    position: absolute;
+    right: 0%;
+    top: 1px;
+    border: 0px solid;
+    border-radius: 15px;
+    height: 33px;
+    width: 0%;
+    overflow: hidden;
+    background-color: #8f0c49;
+    color: white;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: bolder;
+    transition: .2s ease;
+}
+
+    .delete-button:hover {
+        background-color: #a8094e;
+        transition: .2s ease;
+    }
+
+.td-row:hover .delete-button {
+    width: 200px;
+    transition: .2s ease;
+}
+
 .td-row:hover td p {
-    background-color: #f2327a;
+    background-color: #ff3477;
+    transition: background-color .2s ease;
 }
 
 .td-row td p {
@@ -430,6 +468,7 @@ th {
     padding-top: 3px;
     text-overflow: ellipsis;
     overflow: hidden;
+    transition: background-color .2s ease;
 }
 
 .add-button {

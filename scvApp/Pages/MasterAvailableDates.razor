@@ -30,20 +30,26 @@
             {
                 @if (submits.Any(submit => submit.Date == date.Id) == true)
                 {
-                    <tr class="td-row" onclick="@EditTakenRow">
-                        <td><p style="border-radius: 15px 0px 0px 15px;">@date.Term.ToString()</p></td>
-                        <td><p>@date.Start.ToString()</p></td>
-                        <td><p>@date.MaxNumberOfStudents.ToString()</p></td>
-                        <td><p style="border-radius: 0px 15px 15px 0px;">Zaseden</p></td>
+                    <tr class="td-row">
+                        <td><p onclick="@EditTakenRow" style="border-radius: 15px 0px 0px 15px;">@date.Term.ToString()</p></td>
+                        <td><p onclick="@EditTakenRow">@date.Start.ToString()</p></td>
+                        <td><p onclick="@EditTakenRow">@date.MaxNumberOfStudents.ToString()</p></td>
+                        <td>
+                            <p style="border-radius: 0px 15px 15px 0px;">Zaseden</p>
+                        </td>
                     </tr>
                 }
                 else
                 {
-                    <tr class="td-row" @onclick="(() => EditFreeRow(date.Id.ToString()))">
-                        <td><p style="border-radius: 15px 0px 0px 15px;">@date.Term.ToString()</p></td>
-                        <td><p>@date.Start.ToString()</p></td>
-                        <td><p>@date.MaxNumberOfStudents.ToString()</p></td>
-                        <td><p style="border-radius: 0px 15px 15px 0px;">Prost</p></td>
+                    <tr class="td-row">
+                        <td><p @onclick="(() => EditFreeRow(date.Id.ToString()))" style="border-radius: 15px 0px 0px 15px;">@date.Term.ToString()</p></td>
+                        <td><p @onclick="(() => EditFreeRow(date.Id.ToString()))">@date.Start.ToString()</p></td>
+                        <td><p @onclick="(() => EditFreeRow(date.Id.ToString()))">@date.MaxNumberOfStudents.ToString()</p></td>
+                        <td style="position: relative;">
+                            <p style="border-radius: 0px 15px 15px 0px;">Prost</p>
+
+                            <button class="delete-button" @onclick="(() => DeleteDateRow(date.Id))">IZBRIŠI</button>
+                        </td>
                     </tr>
                 }
             }
@@ -56,6 +62,8 @@
     string dateId = "0";
     List<Date> dates = new List<Date>();
     List<Submit> submits = new List<Submit>();
+
+    Date date = new Date();
     protected override async Task OnInitializedAsync()
     {
         dates = await dateservice.GetAllDates();
@@ -75,5 +83,16 @@
     public async void EditFreeRow(string Id)
     {
         NavManager.NavigateTo($"/Create-Date/{Id}");
+    }
+
+    public async void DeleteDateRow(int id)
+    {
+        date = dates.FirstOrDefault(vardate => vardate.Id == id);
+
+        await dateservice.DeleteDate(date);
+
+        date = new Date();
+
+        NavManager.NavigateTo("/Master/All-dates");
     }
 }
