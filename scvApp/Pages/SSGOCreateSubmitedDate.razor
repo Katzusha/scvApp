@@ -11,7 +11,7 @@
 
 <nav class="navbar-master">
     <div class="container">
-        <a href="/ERS/Submited-dates" class="left-button"><div style="margin-top: 12px;">POJDI<br />NAZAJ</div></a>
+        <a href="/SSGO/Submited-dates" class="left-button"><div style="margin-top: 12px;">POJDI<br />NAZAJ</div></a>
         <a class="welcome-container">PRIJAVLJENI TERMINI</a>
     </div>
 </nav>
@@ -50,23 +50,17 @@
                                 </td>
                             </tr>
                         </table>
-                        <input type="time" class="textbox" @bind="submit.Break" />
+                        <input type="time" class="textbox" @bind="submit.Break" readonly />
                         <br />
 
-                        <select class="textbox" @bind="submit.Type" required>
-                            <option>Lokacija ogleda</option>
-                            <option>ŠCV</option>
-                            <option>MIC</option>
-                            <option>Obisk OŠ</option>
-                        </select>
+                        <input type="text" class="textbox" @bind="submit.Type" readonly>
 
                     </td>
                     <td class="right-td-client" style="width: 30%;">
                         <div style="margin: 0 auto; text-align: left;">
-                            <button class="school-button-client" style="background-color: #0094d9; height: 75px; width: 75px;" type="button">
-                                <img src="https://www.scv.si/wp-content/themes/yoo_master2_wp/images/ers.svg" style="width: 50px;"><div>@ers</div>
+                            <button class="school-button-client" style="background-color: #a9d046; height: 75px; width: 75px;" type="button">
+                                <img src="https://www.scv.si/wp-content/themes/yoo_master2_wp/images/ssgo.svg" style="width: 50px;"><div>@ssgo</div>
                             </button>
-
                             <select class="textbox" @bind="submit.Type" style="width: calc(100% - 90px);" required>
                                 <option>Lokacija ogleda</option>
                                 <option>ŠCV</option>

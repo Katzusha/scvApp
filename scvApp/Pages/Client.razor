@@ -205,39 +205,6 @@
         {
             try
             {
-                if (ssgo != "")
-                {
-                    schoolsubmit.SubmitId = submit.Id;
-                    schoolsubmit.SchoolId = 3;
-
-                    await schoolsubmitservice.AddNewSchoolSubmit(schoolsubmit);
-                    schoolsubmit = new SchoolSubmit();
-                }
-                else if (ers != "")
-                {
-                    schoolsubmit.SubmitId = submit.Id;
-                    schoolsubmit.SchoolId = 1;
-
-                    await schoolsubmitservice.AddNewSchoolSubmit(schoolsubmit);
-                    schoolsubmit = new SchoolSubmit();
-                }
-                else if (ssd != "")
-                {
-                    schoolsubmit.SubmitId = submit.Id;
-                    schoolsubmit.SchoolId = 4;
-
-                    await schoolsubmitservice.AddNewSchoolSubmit(schoolsubmit);
-                    schoolsubmit = new SchoolSubmit();
-                }
-                else if (gim != "")
-                {
-                    schoolsubmit.SubmitId = submit.Id;
-                    schoolsubmit.SchoolId = 2;
-
-                    await schoolsubmitservice.AddNewSchoolSubmit(schoolsubmit);
-                    schoolsubmit = new SchoolSubmit();
-                }
-
                 date = dates.FirstOrDefault(vardate => vardate.Term == date.Term);
 
                 submit.Date = date.Id;
@@ -248,6 +215,39 @@
                 }
 
                 await submitservice.AddNewSubmit(submit);
+
+                if (ssgo != "")
+                {
+                    schoolsubmit.SubmitId = submit.Id;
+                    schoolsubmit.SchoolId = 3;
+
+                    await schoolsubmitservice.AddNewSchoolSubmit(schoolsubmit);
+                    schoolsubmit = new SchoolSubmit();
+                }
+                if (ers != "")
+                {
+                    schoolsubmit.SubmitId = submit.Id;
+                    schoolsubmit.SchoolId = 1;
+
+                    await schoolsubmitservice.AddNewSchoolSubmit(schoolsubmit);
+                    schoolsubmit = new SchoolSubmit();
+                }
+                if (ssd != "")
+                {
+                    schoolsubmit.SubmitId = submit.Id;
+                    schoolsubmit.SchoolId = 4;
+
+                    await schoolsubmitservice.AddNewSchoolSubmit(schoolsubmit);
+                    schoolsubmit = new SchoolSubmit();
+                }
+                if (gim != "")
+                {
+                    schoolsubmit.SubmitId = submit.Id;
+                    schoolsubmit.SchoolId = 2;
+
+                    await schoolsubmitservice.AddNewSchoolSubmit(schoolsubmit);
+                    schoolsubmit = new SchoolSubmit();
+                }
 
                 submit = new Submit();
 

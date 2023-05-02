@@ -50,15 +50,10 @@
                                 </td>
                             </tr>
                         </table>
-                        <input type="time" class="textbox" @bind="submit.Break" />
+                        <input type="time" class="textbox" @bind="submit.Break" readonly />
                         <br />
 
-                        <select class="textbox" @bind="submit.Type" required>
-                            <option>Lokacija ogleda</option>
-                            <option>ŠCV</option>
-                            <option>MIC</option>
-                            <option>Obisk OŠ</option>
-                        </select>
+                        <input type="text" class="textbox" @bind="submit.Type" readonly>
 
                     </td>
                     <td class="right-td-client" style="width: 30%;">

@@ -9,8 +9,8 @@
 <div class="fullscreen" style="background-color: #ee5ba0">
     <div class="login-form">
         <form onsubmit="@LogInCheck">
-            <input type="text" placeholder="Uporabniško ime" class="textbox"><br>
-            <input type="password" placeholder="Geslo" class="textbox"><br>
+            <input type="text" placeholder="Uporabniško ime" class="textbox" @bind="login.Username"><br>
+            <input type="password" placeholder="Geslo" class="textbox" @bind="login.Password"><br>
             <button type="submit" class="login-button">Prijava</button>
         </form>
     </div>
@@ -66,7 +66,7 @@
             bool logincheck = false;
             foreach (var user in admins)
             {
-                if (user.SchoolId == 1)
+                if (user.SchoolId == 4)
                 {
                     if (user.Username == login.Username && user.Password == login.Password)
                     {
