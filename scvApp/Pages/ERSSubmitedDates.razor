@@ -1,0 +1,73 @@
+﻿@page "/ERS/Submited-dates"
+
+@inject Services.ISubmitService submitservice;
+@inject Services.IDateService dateservice;
+@inject Services.ISchoolSubmitService schoolsubmitservice;
+
+@inject NavigationManager NavManager;
+
+@using Models
+
+<nav class="navbar-master">
+    <div class="container">
+        <a href="/MasterLogIn" class="left-button"><div style="margin-top: 30px;">ODJAVI</div></a>
+        <a class="welcome-container">PRIJAVE</a>
+        @*<a class="right-button" href="/Master/Sub-admins"><div style="margin-top: 12px; margin-left: -170px;">POD<br />ADMINI</div></a>*@
+    </div>
+</nav>
+
+<div class="fullscreen" style="background-color: #0194d9">
+    <div class="fullscreen-table">
+        <table>
+            <tr>
+                <th style="width: calc(100% / 6);">IME IN PRIIMEK</th>
+                <th style="width: calc(100% / 6);">ŠOLA</th>
+                <th style="width: calc(100% / 6);">EPOŠTA</th>
+                <th style="width: calc(100% / 6);">TELEFONSKA ŠTEVILKA</th>
+                <th style="width: calc(100% / 6);">TERMIN</th>
+                <th style="width: calc(100% / 6);">ŠTEVILO UČENCEV</th>
+            </tr>
+            @foreach (var submit in submits)
+            {
+                @if (ersschoolsubmits.Any(varersschoolsubmit => varersschoolsubmit.SubmitId == submit.Id))
+                {
+                    <tr class="td-row">
+                        <td><p @onclick="(() => EditSubmitRow(submit.Id))" style="border-radius: 15px 0px 0px 15px;">@submit.Firstname @submit.Surname</p></td>
+                        <td><p @onclick="(() => EditSubmitRow(submit.Id))">@submit.SchoolTitle</p></td>
+                        <td><p @onclick="(() => EditSubmitRow(submit.Id))">@submit.Email</p></td>
+                        <td><p @onclick="(() => EditSubmitRow(submit.Id))">@submit.PhoneNumber</p></td>
+                        <td><p>@dates.FirstOrDefault(vardate => vardate.Id == submit.Date).Term - @dates.FirstOrDefault(vardate => vardate.Id == submit.Date).Start</p></td>
+                        <td><p style="border-radius: 0px 15px 15px 0px;" @onclick="(() => EditSubmitRow(submit.Id))">@submit.NumberOfStudents</p></td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</div>
+
+@code
+{
+    List<Submit> submits = new List<Submit>();
+    List<Date> dates = new List<Date>();
+    List<SchoolSubmit> schoolsubmits = new List<SchoolSubmit>();
+    List<SchoolSubmit> ersschoolsubmits = new List<SchoolSubmit>();
+    Submit submit = new Submit();
+
+    public string submitId = "0";
+
+    protected override async Task OnInitializedAsync()
+    {
+        dates = await dateservice.GetAllDates();
+        submits = await submitservice.GetAllSubmits();
+        schoolsubmits = await schoolsubmitservice.GetAllSchoolSubmits();
+
+        ersschoolsubmits = schoolsubmits.Where(varschoolsubmit => varschoolsubmit.SchoolId == 1).ToList();
+    }
+
+    public async void EditSubmitRow(int Id)
+    {
+        submitId = submits.FirstOrDefault(varsubmit => varsubmit.Id == Id).Id.ToString();
+
+        NavManager.NavigateTo($"/ERS/Submited-date/{submitId}");
+    }
+}

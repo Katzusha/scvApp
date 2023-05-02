@@ -11,7 +11,7 @@
         <form onsubmit="@LogInCheck">
             <input type="text" placeholder="Uporabniško ime" class="textbox" @bind="login.Username"><br>
             <input type="password" placeholder="Geslo" class="textbox" @bind="login.Password"><br>
-            <button type="Prijava" class="login-button" formaction="/ERS-Admin">PRIJAVA</button>
+            <button type="Prijava" class="login-button">PRIJAVA</button>
         </form>
     </div>
 </div>
@@ -70,7 +70,7 @@
                 {
                     if (user.Username == login.Username && user.Password == login.Password)
                     {
-                        NavManager.NavigateTo("/");
+                        NavManager.NavigateTo("/ERS/Submited-dates");
                         logincheck = true;
                     }
                 }
