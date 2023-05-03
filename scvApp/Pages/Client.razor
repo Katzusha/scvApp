@@ -46,7 +46,7 @@
                             {
                                 if (submits.Any(submit => submit.Date == date.Id) == false)
                                 {
-                                    <option>@date.Term</option>
+                                    <option @onselect="(() => SelectedDate(date.Id))">@date.Term</option>
                                 }
                             }
 
@@ -262,5 +262,10 @@
         {
             await JsRuntime.InvokeVoidAsync("alert", "Please check at least one of the schools!");
         }
+    }
+
+    public void SelectedDate(int id)
+    {
+        
     }
 }

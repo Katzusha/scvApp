@@ -12,7 +12,7 @@
 <nav class="navbar-master">
     <div class="container">
         <a href="/SSGO/Submited-dates" class="left-button"><div style="margin-top: 12px;">POJDI<br />NAZAJ</div></a>
-        <a class="welcome-container">PRIJAVLJENI TERMINI</a>
+        <a class="welcome-container">PRIJAVLJENI TERMIN</a>
     </div>
 </nav>
 
@@ -61,18 +61,20 @@
                             <button class="school-button-client" style="background-color: #a9d046; height: 75px; width: 75px;" type="button">
                                 <img src="https://www.scv.si/wp-content/themes/yoo_master2_wp/images/ssgo.svg" style="width: 50px;"><div>@ssgo</div>
                             </button>
-                            <select class="textbox" @bind="submit.Type" style="width: calc(100% - 90px);" required>
-                                <option>Lokacija ogleda</option>
-                                <option>ŠCV</option>
-                                <option>MIC</option>
-                                <option>Obisk OŠ</option>
+                            <select class="textbox" @bind="Name" style="width: calc(100% - 90px);" required>
+                                <option selected>Predstavnik / Voditelj</option>
+
+                                @foreach (var varteacher in ssgoteachers)
+                                {
+                                    <option>@varteacher.Title @varteacher.Firstname.Substring(0, 1). @varteacher.Surname</option>
+                                }
                             </select>
                         </div>
                     </td>
                 </tr>
             </table>
             <textarea style="height: 100px; resize: none;" class="textbox" placeholder="Note" @bind="submit.Note" readonly></textarea>
-            <button type="submit" class="login-button-client" formaction="/Thank-you">SUBMIT</button>
+            <button type="submit" class="login-button-client" formaction="/Thank-you">SHRANI</button>
         </form>
     </div>
 </div>
@@ -82,7 +84,7 @@
     [Parameter]
     public string submitId { get; set; }
 
-    string ers, ssd, gim, ssgo = "";
+    string ers, ssd, gim, ssgo, Name = "";
 
     Date date = new Date();
     Submit submit = new Submit();
@@ -90,6 +92,7 @@
     List<Date> dates = new List<Date>();
     List<Submit> submits = new List<Submit>();
     List<Teacher> teachers = new List<Teacher>();
+    List<Teacher> ssgoteachers = new List<Teacher>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -101,6 +104,9 @@
         {
             dates = await dateservice.GetAllDates();
             submits = await submitservice.GetAllSubmits();
+            teachers = await teacherservice.GetAllTeachers();
+
+            ssgoteachers = teachers.Where(varteacher => varteacher.SchoolId == 3).ToList();
 
             submit = submits.FirstOrDefault(varsubmit => varsubmit.Id.ToString() == submitId);
             date = dates.FirstOrDefault(vardate => vardate.Id == submit.Date);

@@ -8,6 +8,7 @@
         public string Email { get; set; }
         public string Title { get; set; }
         public string PhonrNumber { get; set; }
+        public int SchoolId { get; set; }
         public bool isGuide { get; set; }
     }
 }

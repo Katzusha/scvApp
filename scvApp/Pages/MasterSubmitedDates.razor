@@ -70,7 +70,7 @@
     {
         submitId = submits.FirstOrDefault(varsubmit => varsubmit.Id == Id).Id.ToString();
 
-        NavManager.NavigateTo($"/Submited-date/{submitId}");
+        NavManager.NavigateTo($"/Submited-date/{submitId}", true);
     }
 
     public async void RejectSubmitRow(int Id)
@@ -79,7 +79,7 @@
 
         await submitservice.DeleteSubmit(submit);
 
-        NavManager.NavigateTo("/Master/Submited-dates");
+        NavManager.NavigateTo("/Master/Submited-dates", true);
     }
 
     public async void AcceptSubmitRow(int Id)
@@ -90,7 +90,7 @@
 
         await submitservice.UpdateSubmit(submit);
 
-        NavManager.NavigateTo("/Master/Submited-dates");
+        NavManager.NavigateTo("/Master/Submited-dates", true);
     }
 
     public async void ReturnSubmitRow(int Id)
@@ -101,6 +101,6 @@
 
         await submitservice.UpdateSubmit(submit);
 
-        NavManager.NavigateTo("/Master/Submited-dates");
+        NavManager.NavigateTo("/Master/Submited-dates", true);
     }
 }
