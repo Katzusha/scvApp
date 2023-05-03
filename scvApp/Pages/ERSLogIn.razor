@@ -9,9 +9,13 @@
 <div class="fullscreen" style="background-color: #0194d9">
     <div class="login-form">
         <form onsubmit="@LogInCheck">
-            <input type="text" placeholder="Uporabniško ime" class="textbox" @bind="login.Username"><br>
-            <input type="password" placeholder="Geslo" class="textbox" @bind="login.Password"><br>
-            <button type="Prijava" class="login-button">PRIJAVA</button>
+            <input type="text" id="username" class="textbox" @bind="login.Username">
+            <label class="input-label" for="username">Uporabniško ime</label>
+            <br>
+            <input type="password" id="password" class="textbox" @bind="login.Password">
+            <label class="input-label" for="password">Geslo</label>
+            <br>
+            <button type="submit" class="login-button">PRIJAVA</button>
         </form>
     </div>
 </div>

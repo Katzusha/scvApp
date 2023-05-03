@@ -22,38 +22,51 @@
             <table style="width: 100%;">
                 <tr>
                     <td class="left-td-client" style="width: 30%;">
-                        <input type="text" class="textbox" @bind="submit.Firstname" placeholder="Ime" readonly />
+                        <input type="text" class="textbox" @bind="submit.Firstname" id="firstname" readonly />
+                        <label class="input-label" for="firstname">Ime</label>
                         <br />
-                        <input type="text" class="textbox" @bind="submit.Surname" placeholder="Priimek" readonly />
+                        <input type="text" class="textbox" @bind="submit.Surname" id="surname" readonly />
+                        <label class="input-label" for="surname">Priimek</label>
                         <br />
-                        <input type="email" class="textbox" @bind="submit.Email" placeholder="E-poštni naslov" readonly />
+                        <input type="email" class="textbox" @bind="submit.Email" id="email" readonly />
+                        <label class="input-label" for="email">E-pošta</label>
                         <br />
-                        <input type="text" class="textbox" @bind="submit.PhoneNumber" placeholder="Telefonska številka" readonly />
+                        <input type="text" class="textbox" @bind="submit.PhoneNumber" id="phonenumber" readonly />
+                        <label class="input-label" for="phonenumber">Telefonska številka</label>
                         <br />
-                        <input type="text" class="textbox" @bind="submit.SchoolTitle" placeholder="Naziv šole" readonly />
+                        <input type="text" class="textbox" @bind="submit.SchoolTitle" id="schooltitle" readonly />
+                        <label class="input-label" for="schooltitle">Naziv šole</label>
                         <br />
-                        <input type="text" class="textbox" @bind="submit.Address" placeholder="Naslov šole" readonly />
+                        <input type="text" class="textbox" @bind="submit.Address" id="address" readonly />
+                        <label class="input-label" for="address">Naslov šole</label>
                     </td>
                     <td class="right-td-client" style="width: 30%;">
-                        <input type="number" class="textbox" min="5" max="9" @bind="submit.Class" placeholder="Razrednja stopnja" readonly />
+                        <input type="number" class="textbox" min="5" max="9" @bind="submit.Class" id="class" readonly />
+                        <label class="input-label" for="class">Razrednja stopnja</label>
                         <br />
-                        <input type="text" class="textbox" @bind="date.Term" readonly>
+                        <input type="text" class="textbox" @bind="date.Term" id="term" readonly>
+                        <label class="input-label" for="term">Termin</label>
                         <br />
-                        <input type="number" placeholder="Število učencev" min="0" class="textbox" @bind="submit.NumberOfStudents" readonly />
+                        <input type="number" id="numberofstudents" min="0" class="textbox" @bind="submit.NumberOfStudents" readonly />
+                        <label class="input-label" for="numberofstudents">Število učencev</label>
                         <table style="width:100%;">
                             <tr>
                                 <td>
-                                    <input type="time" class="textbox" readonly @bind="submit.Start" />
+                                    <input type="time" class="textbox" readonly @bind="submit.Start" id="start" />
+                                    <label class="input-label" for="start">Začetek</label>
                                 </td>
                                 <td>
-                                    <input type="time" class="textbox" readonly @bind="submit.End" />
+                                    <input type="time" class="textbox" readonly @bind="submit.End" id="end" />
+                                    <label class="input-label" for="end">Konec</label>
                                 </td>
                             </tr>
                         </table>
-                        <input type="time" class="textbox" @bind="submit.Break" readonly />
+                        <input type="time" class="textbox" @bind="submit.Break" id="break" readonly />
+                        <label class="input-label" for="break">Odmor</label>
                         <br />
 
-                        <input type="text" class="textbox" @bind="submit.Type" readonly>
+                        <input type="text" class="textbox" @bind="submit.Type" id="type" readonly>
+                        <label class="input-label" for="type">Lokacija ogleda</label>
 
                     </td>
                     <td class="right-td-client" style="width: 30%;">
@@ -62,14 +75,14 @@
                                 <img src="https://www.scv.si/wp-content/themes/yoo_master2_wp/images/ers.svg" style="width: 50px;"><div>@ers</div>
                             </button>
 
-                            <select class="textbox" @bind="Name" style="width: calc(100% - 90px); margin-top: -25px; vertical-align: middle;" required>
-                                <option selected>Predstavnik / Voditelj</option>
+                            <select class="textbox" @bind="Name" style="width: calc(100% - 90px); margin-top: -25px; vertical-align: middle;" id="teacher" required>
 
                                 @foreach (var varteacher in ersteachers)
                                 {
                                     <option>@varteacher.Title @varteacher.Firstname.Substring(0, 1). @varteacher.Surname</option>
                                 }
                             </select>
+                            <label class="input-label" for="teacher">Predstavni učitelj</label>
                         </div>
                     </td>
                 </tr>

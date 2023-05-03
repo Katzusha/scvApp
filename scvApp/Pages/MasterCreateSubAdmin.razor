@@ -17,17 +17,29 @@
 <div class="fullscreen" style="background-color: #ed1164">
     <div class="login-form">
         <form onsubmit="@CheckSubmit">
-            <input type="text" placeholder="Ime" class="textbox" @bind=admin.Firstname><br>
-            <input type="text" placeholder="Priimek" class="textbox" @bind=admin.Surname><br>
-            <input type="text" placeholder="Nazim" class="textbox" @bind=admin.Title><br>
-            <input type="email" placeholder="E-poštni naslov" class="textbox" @bind=admin.Email><br>
-            <input type="text" placeholder="Telefonska številka" class="textbox" @bind=admin.PhoneNumber><br>
-            <input type="text" placeholder="Uporabniško ime" class="textbox" @bind=admin.Username><br>
-            <input type="text" placeholder="Geslo" class="textbox" @bind=admin.Password><br>
+            <input type="text" id="firstname" class="textbox" @bind=admin.Firstname>
+            <label class="input-label" for="firstname">Ime</label>
+            <br>
+            <input type="text" id="surname" class="textbox" @bind=admin.Surname>
+            <label class="input-label" for="surname">Priimek</label>
+            <br>
+            <input type="text" id="title" class="textbox" @bind=admin.Title>
+            <label class="input-label" for="title">Naziv</label>
+            <br>
+            <input type="email" id="email" class="textbox" @bind=admin.Email>
+            <label class="input-label" for="email">E-pošta</label>
+            <br>
+            <input type="text" id="phonenumber" class="textbox" @bind=admin.PhoneNumber>
+            <label class="input-label" for="phonenumber">Telefonska številka</label>
+            <br>
+            <input type="text" id="username" class="textbox" @bind=admin.Username>
+            <label class="input-label" for="username">Uporabniško ime</label>
+            <br>
+            <input type="text" id="password" class="textbox" @bind=admin.Password>
+            <label class="input-label" for="password">Geslo</label>
+            <br>
 
-            <select class="textbox" @bind=school.Name>
-                <option>Šola</option>
-
+            <select class="textbox" @bind=school.Name id="school">
                 @foreach (var school in schools)
                 {
                     if (school.Id == admin.SchoolId)
@@ -40,6 +52,7 @@
                     }
                 }
             </select>
+            <label class="input-label" for="school">Šola</label>
             <button type="submit" class="login-button">Ustvari</button>
         </form>
     </div>

@@ -488,3 +488,17 @@ th {
     .add-button:hover {
         box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.2);
     }
+
+.input-label {
+    font-size: 21px;
+    color: #b7b7b7;
+    margin-top: -70px;
+    float: left;
+    margin-left: 30px;
+    z-index: 100;
+    position: relative;
+}
+
+option {
+    background-color: #3e3e3e;
+}

@@ -24,24 +24,29 @@
             <table style="width: 100%;">
                 <tr>
                     <td class="left-td-client">
-                        <input type="text" class="textbox" @bind="submit.Firstname" placeholder="Ime" required/>
+                        <input type="text" id="firstname" class="textbox" @bind="submit.Firstname" required />
+                        <label class="input-label" for="firstname">Ime</label>
                         <br />
-                        <input type="text" class="textbox" @bind="submit.Surname" placeholder="Priimek" required/>
+                        <input type="text" id="surname" class="textbox" @bind="submit.Surname" required/>
+                        <label class="input-label" for="surname">Priimek</label>
                         <br />
-                        <input type="email" class="textbox" @bind="submit.Email" placeholder="E-pošta" required/>
+                        <input type="email" id="email" class="textbox" @bind="submit.Email" required/>
+                        <label class="input-label" for="email">E-pošta</label>
                         <br />
-                        <input type="text" class="textbox" @bind="submit.PhoneNumber" placeholder="Telefonska številka" required/>
+                        <input type="text" id="phonenumber" class="textbox" @bind="submit.PhoneNumber" required />
+                        <label class="input-label" for="phonenumber">Telefonska številka</label>
                         <br />
-                        <input type="text" class="textbox" @bind="submit.SchoolTitle" placeholder="Naziv šole" required/>
+                        <input type="text" id="schooltitle" class="textbox" @bind="submit.SchoolTitle" required />
+                        <label class="input-label" for="schooltitle">Naziv šole</label>
                         <br />
-                        <input type="text" class="textbox" @bind="submit.Address" placeholder="Naslov šole" required/>
+                        <input type="text" id="address" class="textbox" @bind="submit.Address" required />
+                        <label class="input-label" for="address">Naslov šole</label>
                     </td>
                     <td class="right-td-client">
-                        <input type="number" class="textbox" min="5" max="9" @bind="submit.Class" placeholder="Razredna stopnja" required />
+                        <input type="number" class="textbox" id="classlevel" min="5" max="9" @bind="submit.Class" required />
+                        <label class="input-label" for="classlevel">Razredna stopnja</label>
                         <br />
-                        <select class="textbox" @bind="date.Term" @onselectionchange="UpdateMaxNumberOfStudents" required>
-                            <option selected>Termin</option>
-
+                        <select class="textbox" id="term" @bind="date.Term" @onselectionchange="UpdateMaxNumberOfStudents" required>
                             @foreach (var date in dates.OrderBy(vardate => vardate.Term).ToList())
                             {
                                 if (submits.Any(submit => submit.Date == date.Id) == false)
@@ -51,19 +56,24 @@
                             }
 
                         </select>
+                        <label class="input-label" for="term">Termin</label>
                         <br />
-                        <input type="number" placeholder="Število učencev" max="@maxnumberofstudents" min="0" class="textbox" @bind="submit.NumberOfStudents" required />
+                        <input type="number" id="numberofstudents" max="@maxnumberofstudents" min="0" class="textbox" @bind="submit.NumberOfStudents" required />
+                        <label class="input-label" for="numberofstudents">Število učencev</label>
                         <table style="width:100%;">
                             <tr>
                                 <td>
-                                    <input type="time" class="textbox" required @bind="submit.Start"/>
+                                    <input type="time" class="textbox" id="start" required @bind="submit.Start" />
+                                    <label class="input-label" for="start">Začetek</label>
                                 </td>
                                 <td>
-                                    <input type="time" class="textbox" required @bind="submit.End"/>
+                                    <input type="time" class="textbox" id="end" required @bind="submit.End" />
+                                    <label class="input-label" for="end">Konec</label>
                                 </td>
                             </tr>
                         </table>
-                        <input type="time" class="textbox" @bind="submit.Break"/>
+                        <input type="time" class="textbox" id="break" @bind="submit.Break" />
+                        <label class="input-label" for="break">Odmor</label>
                         <br />
                     </td>
                     <td class="right-td-client" style="width: 30%;">
@@ -87,17 +97,18 @@
                                 VSE
                             </button>
                             <br />
-                            <select class="textbox" @bind="submit.Type" required>
-                                <option>Lokacija ogleda</option>
+                            <select class="textbox" id="type" @bind="submit.Type" style="margin-top: 10px;" required>
                                 <option>ŠCV</option>
                                 <option>MIC</option>
                                 <option>Obisk OŠ</option>
                             </select>
+                            <label class="input-label" for="type">Lokacija ogleda</label>
                         </div>
                     </td>
                 </tr>
             </table>
-            <textarea style="height: 100px; resize: none;" class="textbox" placeholder="Note" @bind="submit.Note"></textarea>
+            <textarea style="height: 100px; resize: none;" class="textbox" id="note" @bind="submit.Note"></textarea>
+            <label class="input-label" for="note" style="margin-top: -125px;">Opomba</label>
             <button type="submit" class="login-button-client" formaction="/Thank-you">ODDAJ</button>
         </form>
     </div>
