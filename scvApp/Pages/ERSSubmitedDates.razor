@@ -59,6 +59,11 @@
     {
         dates = await dateservice.GetAllDates();
         submits = await submitservice.GetAllSubmits();
+
+        List<Submit> varsubmits = submits.Where(s => s.isConfirmed == true).ToList();
+
+        submits = varsubmits;
+
         schoolsubmits = await schoolsubmitservice.GetAllSchoolSubmits();
 
         ersschoolsubmits = schoolsubmits.Where(varschoolsubmit => varschoolsubmit.SchoolId == 1).ToList();
