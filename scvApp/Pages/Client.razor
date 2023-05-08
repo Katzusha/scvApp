@@ -43,15 +43,22 @@
                         <label class="input-label" for="address">Naslov šole</label>
                     </td>
                     <td class="right-td-client">
-                        <input type="number" class="textbox" id="classlevel" min="5" max="9" @bind="submit.Class" required />
+                        <select type="number" class="textbox" id="classlevel" min="5" max="9" @bind="submit.Class" required >
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                        </select>
+
                         <label class="input-label" for="classlevel">Razredna stopnja</label>
                         <br />
-                        <select class="textbox" id="term" @bind="date.Term" @onselectionchange="UpdateMaxNumberOfStudents" required>
+                        <select class="textbox" id="term" Value="@date.Term" required>
                             @foreach (var date in dates.OrderBy(vardate => vardate.Term).ToList())
                             {
                                 if (submits.Any(submit => submit.Date == date.Id) == false)
                                 {
-                                    <option @onselect="(() => SelectedDate(date.Id))">@date.Term</option>
+                                    <option @onselect="SelectedDate">@date.Term</option>
                                 }
                             }
 
@@ -63,7 +70,7 @@
                         <table style="width:100%;">
                             <tr>
                                 <td>
-                                    <input type="time" class="textbox" id="start" required @bind="submit.Start" />
+                                    <input type="time" class="textbox" id="start" required @bind="submit.Start" readonly/>
                                     <label class="input-label" for="start">Začetek</label>
                                 </td>
                                 <td>
@@ -275,8 +282,13 @@
         }
     }
 
-    public void SelectedDate(int id)
+    public void SelectedDate()
     {
+        int id = dates.FirstOrDefault(vardate => vardate.Term == date.Term).Id;
+
         maxnumberofstudents = Int32.Parse(dates.FirstOrDefault(vardate => vardate.Id == id).MaxNumberOfStudents.ToString());
+
+        submit.Start = dates.FirstOrDefault(vardate => vardate.Id == id).Start;
+
     }
 }
