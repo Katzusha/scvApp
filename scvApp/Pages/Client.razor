@@ -277,6 +277,6 @@
 
     public void SelectedDate(int id)
     {
-        
+        maxnumberofstudents = Int32.Parse(dates.FirstOrDefault(vardate => vardate.Id == id).MaxNumberOfStudents.ToString());
     }
 }
