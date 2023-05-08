@@ -37,7 +37,7 @@
                         <td><p @onclick="(() => EditAdminRow(admin.Id))">@admin.Title</p></td>
                         <td><p @onclick="(() => EditAdminRow(admin.Id))">@admin.Email.ToString()</p></td>
                         <td style="position: relative;">
-                            <p style="border-radius: 0px 15px 15px 0px;">@schools.FirstOrDefault(school => school.Id == admin.SchoolId).Name</p>
+                            <p style="border-radius: 0px 15px 15px 0px;" @onclick="(() => EditAdminRow(admin.Id))">@schools.FirstOrDefault(school => school.Id == admin.SchoolId).Name</p>
 
                             <button class="delete-button" @onclick="(() => DeleteAdminRow(admin.Id))">IZBRIŠI</button>
                         </td>

@@ -35,7 +35,7 @@
                         <td><p onclick="@EditTakenRow">@date.Start.ToString()</p></td>
                         <td><p onclick="@EditTakenRow">@date.MaxNumberOfStudents.ToString()</p></td>
                         <td>
-                            <p style="border-radius: 0px 15px 15px 0px;">Zaseden</p>
+                            <p style="border-radius: 0px 15px 15px 0px;" @onclick="(() => EditFreeRow(date.Id.ToString()))">Zaseden</p>
                         </td>
                     </tr>
                 }
@@ -46,7 +46,7 @@
                         <td><p @onclick="(() => EditFreeRow(date.Id.ToString()))">@date.Start.ToString()</p></td>
                         <td><p @onclick="(() => EditFreeRow(date.Id.ToString()))">@date.MaxNumberOfStudents.ToString()</p></td>
                         <td style="position: relative;">
-                            <p style="border-radius: 0px 15px 15px 0px;">Prost</p>
+                            <p style="border-radius: 0px 15px 15px 0px;" @onclick="(() => EditFreeRow(date.Id.ToString()))">Prost</p>
 
                             <button class="delete-button" @onclick="(() => DeleteDateRow(date.Id))">IZBRIŠI</button>
                         </td>

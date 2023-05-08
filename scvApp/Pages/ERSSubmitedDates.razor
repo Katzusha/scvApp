@@ -60,9 +60,7 @@
         dates = await dateservice.GetAllDates();
         submits = await submitservice.GetAllSubmits();
 
-        List<Submit> varsubmits = submits.Where(s => s.isConfirmed == true).ToList();
-
-        submits = varsubmits;
+        submits = submits.Where(s => s.isConfirmed == true).ToList();
 
         schoolsubmits = await schoolsubmitservice.GetAllSchoolSubmits();
 
