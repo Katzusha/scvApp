@@ -53,17 +53,28 @@
 
                         <label class="input-label" for="classlevel">Razredna stopnja</label>
                         <br />
-                        <select class="textbox" id="term" Value="@date.Term" required>
-                            @foreach (var date in dates.OrderBy(vardate => vardate.Term).ToList())
-                            {
-                                if (submits.Any(submit => submit.Date == date.Id) == false)
-                                {
-                                    <option @onselect="SelectedDate">@date.Term</option>
-                                }
-                            }
+                        <table>
+                            <tr>
+                                <td style="width: 90%;">
+                                    <select class="textbox" id="term" @bind="date.Term" required>
+                                        @foreach (var vardate in dates.OrderBy(vardate => vardate.Term).ToList())
+                                        {
+                                            if (submits.Any(submit => submit.Date == date.Id) == false)
+                                            {
+                                                <option>@vardate.Term</option>
+                                            }
+                                        }
+                                    </select>
+                                    <label class="input-label" for="term">Termin</label>
+                                </td>
+                                <td style="width: 10%;">
+                                    <button type="button" style="height: 50px; width: 50px; border-radius: 5px; background-color: rgba(0, 0, 0, 0.2); border: 0px transparent; cursor: default; color: white; font-size: 24px; cursor: pointer; margin-top: -10px;" onclick="@SelectedDate">
+                                        ⁐
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
 
-                        </select>
-                        <label class="input-label" for="term">Termin</label>
                         <br />
                         <input type="number" id="numberofstudents" max="@maxnumberofstudents" min="0" class="textbox" @bind="submit.NumberOfStudents" required />
                         <label class="input-label" for="numberofstudents">Število učencev</label>
@@ -74,12 +85,12 @@
                                     <label class="input-label" for="start">Začetek</label>
                                 </td>
                                 <td>
-                                    <input type="time" class="textbox" id="end" required @bind="submit.End" />
+                                    <input type="time" class="textbox" id="end" required @bind="submit.End" readonly/>
                                     <label class="input-label" for="end">Konec</label>
                                 </td>
                             </tr>
                         </table>
-                        <input type="time" class="textbox" id="break" @bind="submit.Break" />
+                        <input type="time" class="textbox" id="break" @bind="submit.Break" readonly/>
                         <label class="input-label" for="break">Odmor</label>
                         <br />
                     </td>

@@ -7,7 +7,9 @@
 @inject Services.ISubmitService submitservice;
 @inject Services.ITeacherService teacherservice;
 
-@using Models
+@using Models;
+@using System.Net;
+@using System.Text;
 
 <nav class="navbar-master">
     <div class="container">
@@ -114,8 +116,9 @@
                     </td>
                 </tr>
             </table>
-            <textarea style="height: 100px; resize: none;" class="textbox" placeholder="Note" @bind="submit.Note"></textarea>
-            <button type="submit" class="login-button-client" formaction="/Thank-you">SUBMIT</button>
+            <textarea style="height: 50px; resize: none;" class="textbox" placeholder="Note" @bind="submit.Note"></textarea>
+            <textarea style="height: 50px; resize: none;" class="textbox" placeholder="Note" @bind="comment"></textarea>
+            <button type="submit" class="login-button-client" formaction="/Master/Submited-dates">POTRDI</button>
         </form>
     </div>
 </div>
@@ -125,7 +128,7 @@
     [Parameter]
     public string submitId { get; set; }
 
-    string ers, ssd, gim, ssgo = "";
+    string ers, ssd, gim, ssgo, comment = "";
 
     Date date = new Date();
     Submit submit = new Submit();
@@ -152,21 +155,34 @@
 
     public async Task CheckSubmit()
     {
-        if (submitId == "0")
-        {
-            await dateservice.AddNewDate(date);
+        string html;
 
-            date = new Date();
-            NavManager.NavigateTo("/Master/All-dates");
-        }
-        else
-        {
-            await dateservice.UpdateDate(date);
-            await submitservice.UpdateSubmit(submit);
+        // Create a request using a URL that can receive a post.
+        WebRequest request = WebRequest.Create("https://kerieri.eu/email.php");
+        // Set the Method property of the request to POST.
+        request.Method = "POST";
+        // Create POST data and convert it to a byte array.
+        string postData = "Email=" + submit.Email + "&Name=" + submit.Firstname + " " + submit.Surname + "&Date=" + date.Term.ToString() + "&Start=" + submit.Start.ToString() + "&End=" + submit.End.ToString() + "&Break=" + submit.Break.ToString() + "&Comment=" + comment;
+        byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+        // Set the ContentType property of the WebRequest.
+        request.ContentType = "application/x-www-form-urlencoded";
+        // Set the ContentLength property of the WebRequest.
+        request.ContentLength = byteArray.Length;
+        // Get the request stream.
+        Stream dataStream = request.GetRequestStream();
+        // Write the data to the request stream.
+        dataStream.Write(byteArray, 0, byteArray.Length);
+        // Close the Stream object.
+        dataStream.Close();
+        // Get the response.
+        WebResponse response = request.GetResponse();
+        Stream data = response.GetResponseStream();
 
-            date = new Date();
-            submit = new Submit();
-            NavManager.NavigateTo("/Master/Submited-dates");
+        using (StreamReader sr = new StreamReader(data))
+        {
+            html = sr.ReadToEnd();
         }
+
+        NavManager.NavigateTo("/Master/Submited-dates");
     }
 }
